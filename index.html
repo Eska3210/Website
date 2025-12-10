@@ -12,6 +12,8 @@
     --bg-dark: #1d1d1d;
     --text-light: #222;
     --text-dark: #f1f1f1;
+    --metal-light: linear-gradient(145deg, #ffffff, #cfd1d3, #a8a8ab);
+    --metal-dark: linear-gradient(145deg, #3a3a3a, #2b2b2b, #1c1c1c);
     --tile-light: linear-gradient(145deg, #f0f0f0, #c8c8c8, #a0a0a0);
     --tile-dark: linear-gradient(145deg, #4a4a4a, #333, #222);
     --highlight: #1e90ff;
@@ -19,8 +21,11 @@
 }
 
 /* ========= DARK MODE ========= */
-body.dark { background: var(--bg-dark); color: var(--text-dark); }
-body.dark header { background: var(--tile-dark); }
+body.dark {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+}
+body.dark header { background: var(--metal-dark); }
 body.dark .menu-tile { background: var(--tile-dark); color: var(--text-dark); }
 body.dark #contentBox { background:#2b2b2b; color:var(--text-dark); box-shadow:4px 4px 14px black; }
 
@@ -36,82 +41,104 @@ body {
     min-height:100vh;
 }
 
-header { text-align:center; padding:20px; width:100%; background: var(--tile-light); box-shadow:0 6px 14px var(--shadow); }
+header {
+    text-align:center;
+    padding:25px;
+    width:100%;
+    background: var(--metal-light);
+    box-shadow: 0 6px 14px var(--shadow);
+    border-bottom: 2px solid #888;
+}
 
-h1 { margin:0; font-size:2rem; }
+h1 { margin:0; font-size:2rem; font-weight:bold; }
 
 /* ========= DARK MODE BUTTON ========= */
 #darkModeToggle {
-    position:absolute; top:20px; right:20px; padding:10px 18px; background: var(--tile-light); border-radius:12px; cursor:pointer; font-weight:bold; box-shadow: 3px 3px 10px var(--shadow);
+    position:absolute;
+    top:20px; right:20px;
+    padding:10px 18px;
+    background: var(--tile-light);
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow:3px 3px 10px var(--shadow);
 }
 body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark); }
 
 /* ========= MENU TILES ========= */
 #menuTiles {
-    margin-top:20px;
+    margin-top:30px;
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
-    gap:15px;
-    width:95%;
+    gap:20px;
+    width:90%;
 }
 .menu-tile {
-    flex:1 1 150px;
-    padding:20px;
-    border-radius:20px;
+    flex:1 1 240px;
+    padding:35px;
+    border-radius:24px;
     background: var(--tile-light);
     font-weight:bold;
     text-align:center;
-    font-size:1rem;
+    font-size:1.5rem;
     cursor:pointer;
-    transition: transform .3s, box-shadow .3s;
-    box-shadow: 2px 2px 10px var(--shadow);
+    transition: transform .3s, box-shadow .3s, border .3s;
+    box-shadow: 3px 3px 14px var(--shadow);
 }
-.menu-tile:hover { transform:scale(1.05); box-shadow:0 0 15px var(--highlight), 2px 2px 10px var(--shadow); }
+.menu-tile:hover {
+    transform:scale(1.08);
+    box-shadow: 0 0 18px var(--highlight), 3px 3px 14px var(--shadow);
+    border:3px solid var(--highlight);
+}
 
-/* ========= PROFILE IMAGE TILE ========= */
+/* ========= PROFILE BIO TILE ========= */
 #profileTile {
     display:flex;
+    flex-wrap:wrap;
     align-items:flex-start;
     justify-content:center;
-    gap:15px;
-    margin-top:25px;
+    margin-top:40px;
+    gap:20px;
+    width:90%;
+    max-width:1000px;
+    background:var(--tile-light);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:3px 3px 14px var(--shadow);
     cursor:pointer;
 }
 #profileTile img {
-    width:120px;
-    height:120px;
+    flex:1 1 250px;
+    max-width:250px;
     border-radius:20px;
     transition: transform .3s;
 }
 #profileTile img:hover { transform:scale(1.1); }
 
-/* ========= BIO (hidden initially) ========= */
+/* ========= BIO BOX ========= */
 #bioBox {
+    flex:2 1 500px;
+    min-width:250px;
     display:none;
-    width:90%;
-    max-width:700px;
-    background: var(--tile-light);
-    padding:15px 20px;
-    border-radius:20px;
-    box-shadow:2px 2px 12px var(--shadow);
-    margin-top:10px;
-    font-size:0.9rem;
+    font-size:0.95rem;
     line-height:1.4rem;
 }
 
 /* ========= CONTENT BOX ========= */
 #contentBox {
-    display:none;
+    margin-top:30px;
+    background:white;
+    padding:30px;
     width:90%;
-    max-width:800px;
-    margin-top:15px;
-    font-size:0.9rem;
-    line-height:1.4rem;
+    max-width:900px;
+    border-radius:20px;
+    box-shadow:4px 4px 14px var(--shadow);
+    display:none;
 }
 
 /* ========= TECHNICAL SKILLS ========= */
-#technicalSkills { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+#technicalSkills { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
 .skill-tile {
     padding:6px 12px;
     border-radius:12px;
@@ -120,17 +147,33 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
     font-weight:bold;
     cursor:default;
     transition: transform .2s, box-shadow .2s;
-    font-size:0.8rem;
 }
 .skill-tile:hover { transform:scale(1.05); box-shadow:0 0 10px var(--highlight), 2px 2px 8px var(--shadow); }
 
 /* ========= FULLSCREEN CV VIEWER ========= */
-#cvFullscreen { display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:9999; padding:20px; }
+#cvFullscreen {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100vw; height:100vh;
+    background:rgba(0,0,0,0.85);
+    z-index:9999;
+    padding:20px;
+}
 #cvFullscreen iframe { width:100%; height:100%; border:none; border-radius:18px; }
 #cvCloseBtn { position:absolute; top:20px; right:30px; font-size:3rem; color:white; cursor:pointer; font-weight:bold; }
 
 /* ========= LIGHTBOX ========= */
-#lightbox { display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center; }
+#lightbox {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100vw; height:100vh;
+    background:rgba(0,0,0,0.85);
+    z-index:10000;
+    justify-content:center;
+    align-items:center;
+}
 #lightbox img { max-width:90%; max-height:90%; border-radius:20px; box-shadow:0 0 20px var(--shadow); }
 #lightboxClose { position:absolute; top:20px; right:30px; font-size:3rem; color:white; cursor:pointer; font-weight:bold; }
 </style>
@@ -154,14 +197,12 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
     <div class="menu-tile" onclick="openSection('contact')">Contact</div>
 </div>
 
-<!-- ========= PROFILE IMAGE (clickable for bio) ========= -->
+<!-- ========= PROFILE IMAGE TILE ========= -->
 <div id="profileTile" onclick="toggleBio()">
     <img src="https://raw.githubusercontent.com/Eska3210/Website/main/Eska%20Rashid%20photo%20PNG.png" alt="Eska Rashid">
-</div>
-
-<!-- ========= BIO BOX ========= -->
-<div id="bioBox">
-    <p>Professional Overview: Eska Rashid is a Programme Leader specialising in Computing, with a dedicated focus on Artificial Intelligence (AI) and Technology Leadership. Eska became a computing Lecturer in 2004 and has always been dedicated to computer science. Eska holds an MSc with Distinction in Computer Science. As the Programme Leader for Computer Science for Bath Spa University, Eska oversees the development and delivery of computer science that prepares students for the rapidly evolving tech industry. She is also leading an AI and Tech project in integrating AI into ESL, ensuring that students gain hands-on experience with the latest technologies and methodologies. In her role as AI & Tech Lead, Eska drives initiatives aimed at making use of advancing AI research and application within the institution. She collaborates with industry partners to create opportunities for student engagement in real-world projects, bridging the gap between academia and industry. She also uses her industry contacts for her AI role that provide insightful and valuable feedback. Eska has built partnerships with leading tech companies, providing students with placements, workshops, opportunities. For student success, Eska has mentored students who have gone on to secure positions at Lloyds Banking Group. Eska is deeply committed to promoting diversity and inclusion within the tech field. She actively participates in initiatives aimed at encouraging underrepresented groups to pursue careers in computing and AI. Her teaching philosophy emphasises hands-on learning, critical thinking, and the implications of AI, ensuring that her students are not only skilled technologists but also responsible innovators. Eska Rashid’s dedication to excellence in computing education and her visionary leadership in AI make her a pivotal figure in shaping the future of technology and innovation.</p>
+    <div id="bioBox">
+        <p>Professional Overview: Eska Rashid is a Programme Leader specialising in Computing, with a dedicated focus on Artificial Intelligence (AI) and Technology Leadership. Eska became a computing Lecturer in 2004 and has always been dedicated to computer science. Eska holds an MSc with Distinction in Computer Science. As the Programme Leader for Computer Science for Bath Spa University, Eska oversees the development and delivery of computer science that prepares students for the rapidly evolving tech industry. She is also leading an AI and Tech project in integrating AI into ESL, ensuring that students gain hands-on experience with the latest technologies and methodologies. In her role as AI & Tech Lead, Eska drives initiatives aimed at making use of advancing AI research and application within the institution. She collaborates with industry partners to create opportunities for student engagement in real-world projects, bridging the gap between academia and industry. She also uses her industry contacts for her AI role that provide insightful and valuable feedback. Eska has built partnerships with leading tech companies, providing students with placements, workshops, opportunities. For student success, Eska has mentored students who have gone on to secure positions at Lloyds Banking Group. Eska is deeply committed to promoting diversity and inclusion within the tech field. She actively participates in initiatives aimed at encouraging underrepresented groups to pursue careers in computing and AI. Her teaching philosophy emphasises hands-on learning, critical thinking, and the implications of AI, ensuring that her students are not only skilled technologists but also responsible innovators. Eska Rashid’s dedication to excellence in computing education and her visionary leadership in AI make her a pivotal figure in shaping the future of technology and innovation.</p>
+    </div>
 </div>
 
 <div id="contentBox"></div>
@@ -203,12 +244,13 @@ function openSection(name){
     const box=document.getElementById("contentBox");
     box.style.display="block";
     box.innerHTML=sections[name];
+    box.scrollIntoView({behavior:"smooth"});
 }
 
 /* ========= TOGGLE BIO ========= */
 function toggleBio(){
     const bio=document.getElementById("bioBox");
-    bio.style.display=(bio.style.display==="none" || bio.style.display==="") ? "block":"none";
+    bio.style.display=(bio.style.display==="none"||bio.style.display==="")?"block":"none";
 }
 
 /* ========= LIGHTBOX ========= */
