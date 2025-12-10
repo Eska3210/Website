@@ -25,7 +25,7 @@ body {
 body.dark { background: var(--bg-dark); color: var(--text-dark);}
 body.dark header { background: var(--metal-dark);}
 body.dark .menu-tile { background: var(--tile-dark); color: var(--text-dark);}
-body.dark #contentBox { background:#2b2b2b; color:var(--text-dark); box-shadow:4px 4px 14px black;}
+body.dark .expandable, body.dark #bioPanel { background: var(--tile-dark); color: var(--text-dark); }
 
 header {
     text-align:center; padding:25px; width:100%; background: var(--metal-light);
@@ -66,6 +66,7 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
 }
 #profileTile img { width:150px; border-radius:20px; transition: transform .3s; margin-bottom:10px;}
 #profileTile img:hover { transform: scale(1.05); }
+
 #bioPanel {
     max-height:0; overflow:hidden; transition:max-height 0.5s ease, padding 0.5s ease;
     background: var(--tile-light); padding:0 20px; border-radius:12px; box-shadow:2px 2px 10px var(--shadow); font-size:0.95rem; line-height:1.5; text-align:left;
@@ -78,8 +79,11 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
     background: var(--tile-light); padding:0 20px; border-radius:12px; box-shadow:2px 2px 10px var(--shadow); font-size:0.95rem; line-height:1.5; text-align:left;
 }
 .expandable.show { padding:20px; max-height:1500px; }
-.expandable-content { max-height:500px; overflow-y:auto; }
+.expandable-content {
+    max-height:400px; overflow-y:auto; /* Scroll independently */
+}
 
+/* Content box */
 #contentBox { margin-top:30px; background:white; padding:30px; width:90%; max-width:900px; border-radius:20px; box-shadow:4px 4px 14px var(--shadow); display:none; font-size:0.95rem; line-height:1.5; max-height:600px; overflow-y:auto; text-align:left; }
 
 #cvFullscreen { display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:9999; padding:20px; }
@@ -142,14 +146,10 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
         <div class="menu-tile" onclick="toggleExpandable('testimonialPanel')">Testimonials</div>
         <div id="testimonialPanel" class="expandable">
             <div class="expandable-content">
-                <!-- Full testimonials content as before -->
                 <p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses in a standardized format. She actively supports lecturers by providing them with the necessary resources. Eska keeps every team member informed about current activities and future goals, fostering a collaborative and transparent environment. She also organizes tech events and promotes a student-led learning approach, encouraging autonomy and innovation among students.” – Ayodeji Triola, Computing Lecturer, AI team member December 2024</p>
-
                 <p>"Working under Eska Rashid's leadership on the AI project has been a good experience. Her vision for integrating AI to enhance learning, particularly for ESL students, is truly inspiring. From the outset, Eska demonstrated a unique ability to blend technical expertise with a deep understanding of students' needs, ensuring that every decision we made was both innovative and impactful." – Khurram Asif, Computing Lecturer, AI team member December 2024</p>
-
                 <p>“Collaborating with Eska Rashid on the AI project has been an exceptional experience. Her innovative vision for harnessing AI to transform learning, especially for ESL students, is both ambitious and inspiring. From the start, Eska exhibited remarkable leadership, seamlessly merging technical acumen with a profound understanding of educational needs, ensuring that every aspect of the project was impactful and future-focused.” – Hriday Grover, Computing Lecturer, AI team member December 2024</p>
-
-                <p>… (all other testimonials continue here as before) …</p>
+                <p>… (all other testimonials continue here as needed) …</p>
             </div>
         </div>
     </div>
