@@ -1,147 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eska Rashid - Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eska Rashid – Portfolio</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+:root {
+    --bg-light:#e6e6e6;
+    --bg-dark:#1d1d1d;
+    --text-light:#222;
+    --text-dark:#f1f1f1;
+    --tile-light:linear-gradient(145deg,#f0f0f0,#c8c8c8,#a0a0a0);
+    --tile-dark:linear-gradient(145deg,#4a4a4a,#333,#222);
+    --highlight:#1e90ff;
+    --shadow:rgba(0,0,0,0.35);
+}
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:var(--bg-light);
+    color:var(--text-light);
+}
+body.dark{
+    background:var(--bg-dark);
+    color:var(--text-dark);
+}
+body.dark .menu-tile,
+body.dark .expandable,
+body.dark #bioPanel{
+    background:var(--tile-dark);
+    color:var(--text-dark);
+}
 
-        .container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+header{
+    text-align:center;
+    padding:25px;
+    background:var(--tile-light);
+    box-shadow:0 6px 14px var(--shadow);
+    border-bottom:2px solid #888;
+}
+h1{margin:0;font-size:2rem;font-weight:bold;}
 
-        .tile {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            height: 330px;
-            overflow-y: auto; /* SCROLLBAR ADDED */
-        }
+#darkModeToggle{
+    position:absolute;
+    top:20px;
+    right:20px;
+    padding:10px 18px;
+    background:var(--tile-light);
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow:3px 3px 10px var(--shadow);
+}
+body.dark #darkModeToggle{
+    background:var(--tile-dark);
+    color:var(--text-dark);
+}
 
-        .tile h2 {
-            margin-top: 0;
-            color: #444;
-        }
+/* Menu Rows */
+.menu-row{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    width:95%;
+    margin:20px auto;
+}
 
-        .profile-img {
-            width: 100%;
-            border-radius: 10px;
-        }
+/* Main menu tiles */
+.menu-tile{
+    flex:1 1 220px;
+    padding:45px;
+    border-radius:24px;
+    background:var(--tile-light);
+    font-weight:bold;
+    text-align:center;
+    font-size:1.6rem;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:3px 3px 16px var(--shadow);
+}
+.menu-tile:hover{
+    transform:scale(1.08);
+    border:3px solid var(--highlight);
+    box-shadow:0 0 20px var(--highlight),3px 3px 16px var(--shadow);
+}
 
-        a {
-            color: #0066cc;
-            text-decoration: none;
-            font-weight: bold;
-        }
+/* Profile Section */
+#profileSection{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:50px;
+    margin:50px 20px;
+    flex-wrap:wrap;
+}
 
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+/* Side Tiles */
+.sideTile{
+    flex:1;
+    max-width:300px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.tileHeader{
+    padding:25px;
+    border-radius:16px;
+    background:var(--tile-light);
+    cursor:pointer;
+    box-shadow:3px 3px 14px var(--shadow);
+    transition:0.3s;
+    font-size:1.6rem;
+    font-weight:bold;
+    text-align:center;
+}
+.tileHeader:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px var(--highlight),3px 3px 14px var(--shadow);
+}
+
+/* Expandable panels */
+.expandable{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.5s ease,padding 0.5s ease;
+    background:var(--tile-light);
+    padding:0 20px;
+    border-radius:12px;
+    box-shadow:2px 2px 10px var(--shadow);
+    font-size:0.95rem;
+    line-height:1.5;
+}
+
+.expandable.show{
+    padding:20px;
+    max-height:700px;
+    overflow:hidden;
+}
+
+/* Scrollable internal area */
+.expandable-content{
+    max-height:600px;
+    overflow-y:auto;
+    padding-right:10px;
+}
+
+/* Profile Image */
+#profileTile{
+    flex:0 0 220px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+}
+#profileTile img{
+    width:180px;
+    border-radius:20px;
+    transition:0.3s;
+}
+#profileTile img:hover{
+    transform:scale(1.05);
+}
+
+#bioPanel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.5s ease,padding 0.5s ease;
+    background:var(--tile-light);
+    padding:0 20px;
+    border-radius:12px;
+    box-shadow:2px 2px 10px var(--shadow);
+}
+#bioPanel.show{
+    padding:20px;
+    max-height:700px;
+    overflow:auto;
+}
+
+/* Technical skill tiles */
+.technical-tiles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+}
+.technical-tiles div{
+    padding:10px 15px;
+    border-radius:12px;
+    background:var(--tile-light);
+    box-shadow:2px 2px 10px var(--shadow);
+    cursor:pointer;
+    transition:0.3s;
+}
+.technical-tiles div:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 12px var(--highlight),2px 2px 10px var(--shadow);
+}
+
+/* Content Box */
+#contentBox{
+    margin:20px;
+    padding:20px;
+    background:var(--tile-light);
+    border-radius:16px;
+    box-shadow:2px 2px 12px var(--shadow);
+    max-height:500px;
+    overflow:auto;
+}
+
+@media(max-width:1200px){
+    #profileSection{
+        flex-direction:column;
+        align-items:center;
+        gap:30px;
+    }
+    .sideTile{max-width:90%;}
+}
+</style>
 </head>
 
 <body>
 
-    <h1>Eska Rashid - Portfolio</h1>
+<header><h1>Eska Rashid Portfolio</h1></header>
 
-    <div class="container">
+<div id="darkModeToggle" onclick="toggleDarkMode()">Dark Mode</div>
 
-        <!-- IMAGE / BIO -->
-        <div class="tile">
-            <h2>Image & Bio</h2>
-            <img src="your-photo.jpg" alt="Your Photo" class="profile-img" />
-            <p><strong>Email:</strong> <a href="mailto:eska3210@gmail.com">eska3210@gmail.com</a></p>
-            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/eska-rashid" target="_blank">linkedin.com/in/eska-rashid</a></p>
+<!-- ROW 1 -->
+<div class="menu-row">
+    <div class="menu-tile" onclick="openSection('about')">About</div>
+    <div class="menu-tile" onclick="openSection('qualifications')">Qualifications</div>
+    <div class="menu-tile" onclick="openSection('history')">Work History</div>
+    <div class="menu-tile" onclick="openSection('ambitions')">Ambitions</div>
+</div>
+
+<!-- ROW 2 -->
+<div class="menu-row">
+    <div class="menu-tile" onclick="openSection('technical')">Technical</div>
+    <div class="menu-tile" onclick="openSection('cv')">CV</div>
+    <div class="menu-tile" onclick="openSection('contact')">Contact</div>
+</div>
+
+<!-- ROW 3 -->
+<div class="menu-row">
+    <div class="menu-tile" onclick="openSection('projects')">Projects</div>
+    <div class="menu-tile" onclick="openSection('experience')">Experience</div>
+</div>
+
+<!-- PROFILE SECTION -->
+<div id="profileSection">
+
+    <!-- Personal Statement -->
+    <div class="sideTile">
+        <div class="tileHeader" onclick="toggleExpandable('personalPanel')">Personal Statement</div>
+        <div id="personalPanel" class="expandable">
+            <div class="expandable-content">
+                <p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership...</p>
+                <p>Increasing my professional network, I have established valuable connections with industry leaders...</p>
+                <p>I am an avid learner, actively attending live webinars on AI, robotics and emerging technologies...</p>
+                <p>My leadership skills were built at Huddersfield University's laptop rental service...</p>
+                <p>Achieving a distinction in my MSc Computer Science programme, I consistently excelled...</p>
+            </div>
         </div>
-
-        <!-- PERSONAL STATEMENT -->
-        <div class="tile">
-            <h2>Personal Statement</h2>
-            <p>
-                I am an experienced Computing Lecturer, AI consultant, and Programme Leader with 
-                a strong background in Artificial Intelligence, Machine Learning, Computer Science 
-                education, curriculum innovation, and leadership. I specialise in developing 
-                modern computing programmes, integrating AI tools into teaching and operations, 
-                and building high-performing academic teams.
-            </p>
-        </div>
-
-        <!-- TESTIMONIALS -->
-        <div class="tile">
-            <h2>Testimonials</h2>
-            <p>
-                “Eska is an exceptional leader with deep knowledge of AI and computing education.  
-                Her innovative mindset and dedication to student success are unmatched.”
-            </p>
-            <p>
-                “Her ability to inspire teams and coordinate complex programmes is outstanding.”
-            </p>
-        </div>
-
-        <!-- PROJECTS TILE -->
-        <div class="tile">
-            <h2>Projects</h2>
-
-            <p><strong>Mathematics, AI Consultant - Outlier AI</strong> (Sept 2024–Present)<br>
-            Working on multiple projects training AI systems including writing, ranking, and evaluating prompts.</p>
-
-            <p><strong>AI & Tech CAPD Project Lead</strong> (June 2024–Present)<br>
-            Leading institution-wide AI adoption, building AI industry contacts, creating an ESL student chatbot, and managing a team of 10 computer scientists.</p>
-
-            <p><strong>AI Curriculum Integration</strong><br>
-            Successfully integrated AI into the curriculum, enhancing student employability.</p>
-        </div>
-
-        <!-- EXPERIENCE TILE -->
-        <div class="tile">
-            <h2>Experience</h2>
-
-            <p><strong>Programme Leader, Computing – ESL</strong> (June 2024–Present)<br>
-            Led development of Computer Science programme, increased enrolment, improved graduate outcomes, built industry partnerships, managed academic teams, and supported assessments/exams.</p>
-
-            <p><strong>Computing Lecturer – ESL Leeds</strong> (Feb 2024–June 2024)<br>
-            Delivered engaging modules, mentored lecturers, supported diverse cohorts.</p>
-
-            <p><strong>Computing Lecturer & Course Coordinator – Shipley College</strong> (2023–2024)<br>
-            Led 3 T-Level Computing programmes and teams of lecturers.</p>
-
-            <p><strong>Home Carer</strong> (2011–2020)<br>
-            Developed strong empathy, interpersonal skills, and resilience.</p>
-
-            <p><strong>Supply Teacher – Capita</strong> (2010–2011)<br>
-            Adapted quickly to varied teaching environments.</p>
-
-            <p><strong>Computing Teacher – Tong Leadership Academy</strong> (2009–2010)</p>
-
-            <p><strong>PGCE Placement – Grange Technology College</strong> (2008)</p>
-
-            <p><strong>Tech Representative Manager – University of Huddersfield</strong> (2003–2008)</p>
-
-            <p><strong>Student Harassment Advisor – University of Huddersfield</strong> (2003–2008)</p>
-
-            <p><strong>Computing Lecturer – Calderdale College</strong> (2003–2006)</p>
-
-            <p><strong>HBOS Group Pension / Halifax Building Society</strong> (1991–2001)</p>
-        </div>
-
     </div>
+
+    <!-- Profile Image -->
+    <div id="profileTile" onclick="toggleExpandable('bioPanel')">
+        <img src="https://raw.githubusercontent.com/Eska3210/Website/main/Eska%20Rashid%20photo%20PNG.png">
+        <div id="bioPanel">
+            <div class="expandable-content">
+                <p>Professional Overview: Eska Rashid is a Programme Leader specialising in Computing, with a focus on AI & Technology Leadership...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="sideTile">
+        <div class="tileHeader" onclick="toggleExpandable('testimonialPanel')">Testimonials</div>
+        <div id="testimonialPanel" class="expandable">
+            <div class="expandable-content">
+                <p>“Eska is a dedicated and committed leader...”</p>
+                <p>“Working under Eska's leadership has been excellent...”</p>
+                <p>“Collaborating with Eska Rashid has been exceptional...”</p>
+                <p>“Eska’s ability to transform ambitious ideas...”</p>
+                <p>“Eska has a remarkable ability...”</p>
+                <p>“Eska has demonstrated exceptional leadership...”</p>
+                <p>“Eska has outstanding leadership...”</p>
+                <p>“Working with Eska, I can learn how to manage...”</p>
+                <p>“Eska’s leadership has been pivotal...”</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CONTENT BOX -->
+<div id="contentBox"></div>
+
+<script>
+const sections = {
+
+about:`<p>Eska Rashid is a Programme Leader specialising in Computing, AI & Technology Leadership.</p>`,
+
+qualifications:`<ul>
+<li>MSc Information Systems Management – Distinction</li>
+<li>PGCE Computing with QTS</li>
+<li>BA (Hons) Interactive Multimedia</li>
+</ul>`,
+
+history:`<ul>
+<li>Programme Leader, Computing – Bath Spa University / ESL</li>
+<li>AI & Tech CAPD Project Lead</li>
+<li>Computing Lecturer – Multiple Institutions</li>
+</ul>`,
+
+ambitions:`<ul>
+<li>Advance AI-driven tools in higher education</li>
+<li>Expand industry partnerships</li>
+<li>Strengthen diversity & inclusion in technology</li>
+</ul>`,
+
+technical:`<div class="technical-tiles">
+<div>PHP</div><div>SQL</div><div>Python</div><div>Java</div><div>C#</div><div>C++</div>
+<div>MySQL</div><div>ASP.NET</div><div>CSS</div><div>Excel</div><div>Access</div>
+<div>Google Suite</div><div>Microsoft Apps</div><div>Bootstrap</div><div>Javascript</div>
+<div>HTML</div><div>XML</div><div>PostgreSQL</div><div>Node.js</div><div>Pandas</div>
+<div>Git</div><div>MongoDB</div><div>.NET</div><div>Illustrator</div><div>Google Sheets</div>
+<div>R</div><div>Redis</div><div>XAMPP</div><div>Power BI</div><div>DAX</div>
+</div>`,
+
+cv:`<h2>Curriculum Vitae</h2>
+<iframe src="Eska Rashid CV.pdf" style="width:100%;height:500px;border-radius:12px;border:2px solid #999;"></iframe>
+<button onclick="openFullscreenCV()" style="padding:12px 18px;margin-top:10px;cursor:pointer;">Open Fullscreen</button>`,
+
+contact:`<p>Email: <a href="mailto:eska3210@gmail.com">eska3210@gmail.com</a></p>
+<p>LinkedIn: <a href="https://linkedin.com/in/eska-rashid" target="_blank">linkedin.com/in/eska-rashid</a></p>
+<p>Mobile: 07776075490</p>`,
+
+projects:`<h2>Projects</h2>
+<div style="max-height:400px;overflow-y:auto;padding-right:10px;">
+<p><strong>Mathematics, AI Consultant – Outlier AI (2024–Present)</strong><br>
+Working on multiple AI model training projects, including writing, ranking, and evaluating chatbot prompts.</p>
+
+<p><strong>AI & Tech CAPD Lead</strong><br>
+Leading an institutional AI transformation project, securing resources, coordinating a 10-person computing team, and integrating AI-driven tools for ESL students.</p>
+
+<p><strong>AI Chatbot Development</strong><br>
+Creating an AI chatbot to support ESL students.</p>
+</div>`,
+
+experience:`<h2>Experience</h2>
+<div style="max-height:400px;overflow-y:auto;padding-right:10px;">
+<p><strong>Programme Leader, Computing – ESL (2024–Present)</strong><br>
+Leading the Computer Science programme, increasing student enrolment, improving graduate employment.</p>
+
+<p><strong>Computing Lecturer – Elizabeth School of London (2024)</strong></p>
+
+<p><strong>Computing Lecturer & Course Coordinator – Shipley College (2023–2024)</strong></p>
+
+<p><strong>Home Carer (2011–2020)</strong></p>
+
+<p><strong>Supply Teacher – Capita (2010–2011)</strong></p>
+
+<p><strong>Computing Teacher – Tong Leadership Academy (2009–2010)</strong></p>
+
+<p><strong>PGCE Placement – The Grange Technology College (2008)</strong></p>
+
+<p><strong>Tech Representative Manager – University of Huddersfield (2003–2008)</strong></p>
+
+<p><strong>Student Harassment Advisor – University of Huddersfield (2003–2008)</strong></p>
+
+<p><strong>Computing Lecturer – Calderdale College (2003–2006)</strong></p>
+
+<p><strong>HBOS Group Pension (1991–2001)</strong></p>
+</div>`
+};
+
+function openSection(name){
+    const box=document.getElementById("contentBox");
+    box.style.display="block";
+    box.innerHTML=sections[name];
+    box.scrollIntoView({behavior:"smooth"});
+}
+
+function toggleExpandable(id){
+    document.getElementById(id).classList.toggle('show');
+}
+
+function toggleDarkMode(){
+    document.body.classList.toggle("dark");
+    document.getElementById("darkModeToggle").textContent=
+        document.body.classList.contains("dark")?"Light Mode":"Dark Mode";
+}
+
+function openFullscreenCV(){
+    window.open("Eska_Rashid_CV.pdf","_blank").focus();
+}
+</script>
 
 </body>
 </html>
