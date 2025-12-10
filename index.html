@@ -7,7 +7,6 @@
 
 <style>
 /* ========= THEME VARIABLES ========= */
-
 :root {
     --bg-light: #e6e6e6;
     --bg-dark: #1d1d1d;
@@ -26,7 +25,6 @@
 }
 
 /* ========= DARK MODE ========= */
-
 body.dark {
     background: var(--bg-dark);
     color: var(--text-dark);
@@ -41,7 +39,6 @@ body.dark #contentBox {
 }
 
 /* ========= GENERAL ========= */
-
 body {
     margin:0;
     font-family: 'Segoe UI', sans-serif;
@@ -66,7 +63,6 @@ header {
 h1 { margin:0; font-size:2rem; font-weight:bold; }
 
 /* ========= DARK MODE BUTTON ========= */
-
 #darkModeToggle {
     position:absolute;
     top:20px;
@@ -84,7 +80,6 @@ body.dark #darkModeToggle {
 }
 
 /* ========= MENU TILES ========= */
-
 #menuTiles {
     margin-top:30px;
     display:flex;
@@ -114,7 +109,6 @@ body.dark #darkModeToggle {
 }
 
 /* ========= CONTENT BOX ========= */
-
 #contentBox {
     margin-top:30px;
     background:white;
@@ -129,8 +123,66 @@ body.dark #darkModeToggle {
 #contentBox h2 { font-size:1.8rem; margin-top:0; }
 #contentBox p, li { font-size:1.2rem; line-height:1.6rem; }
 
-/* ========= FULLSCREEN CV VIEWER ========= */
+/* ========= IMAGE TILES ========= */
+#imageTiles {
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    width:90%;
+}
 
+.image-tile {
+    flex:1 1 120px;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow: 3px 3px 14px var(--shadow);
+    transition: transform .3s, box-shadow .3s;
+}
+
+.image-tile img {
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:inherit;
+    transition: transform .3s;
+}
+
+.image-tile:hover {
+    transform:scale(1.1);
+    box-shadow: 0 0 18px var(--highlight), 3px 3px 14px var(--shadow);
+}
+
+.image-tile:hover img {
+    transform:scale(1.1);
+}
+
+/* ========= TECHNICAL SKILLS GRID ========= */
+#technicalSkills {
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-top:20px;
+}
+
+.skill-tile {
+    padding:12px 18px;
+    border-radius:18px;
+    background: var(--tile-light);
+    box-shadow: 3px 3px 10px var(--shadow);
+    font-weight:bold;
+    cursor:default;
+    transition: transform .3s, box-shadow .3s;
+}
+.skill-tile:hover {
+    transform:scale(1.1);
+    box-shadow: 0 0 18px var(--highlight), 3px 3px 10px var(--shadow);
+}
+
+/* ========= FULLSCREEN CV VIEWER ========= */
 #cvFullscreen {
     display:none;
     position:fixed;
@@ -160,8 +212,38 @@ body.dark #darkModeToggle {
     font-weight:bold;
 }
 
-/* ========= ANIMATIONS ========= */
+/* ========= LIGHTBOX FOR IMAGES ========= */
+#lightbox {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100vw;
+    height:100vh;
+    background:rgba(0,0,0,0.85);
+    z-index:10000;
+    justify-content:center;
+    align-items:center;
+}
 
+#lightbox img {
+    max-width:90%;
+    max-height:90%;
+    border-radius:20px;
+    box-shadow: 0 0 20px var(--shadow);
+    transition: transform .3s;
+}
+
+#lightboxClose {
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:3rem;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* ========= ANIMATIONS ========= */
 @keyframes shine {
     0% { background-position:0% 50%; }
     50% { background-position:100% 50%; }
@@ -187,11 +269,20 @@ body.dark #darkModeToggle {
     <div class="menu-tile" onclick="openSection('qualifications')">Qualifications</div>
     <div class="menu-tile" onclick="openSection('history')">Work History</div>
     <div class="menu-tile" onclick="openSection('ambitions')">Ambitions</div>
+    <div class="menu-tile" onclick="openSection('technical')">Technical</div>
     <div class="menu-tile" onclick="openSection('cv')">CV</div>
     <div class="menu-tile" onclick="openSection('contact')">Contact</div>
 </div>
 
 <div id="contentBox"></div>
+
+<!-- ========= IMAGE TILES ========= -->
+<div id="imageTiles">
+    <div class="image-tile" onclick="openProject('project1', 'image1.jpg')"><img src="image1.jpg" alt="Project 1"></div>
+    <div class="image-tile" onclick="openProject('project2', 'image2.jpg')"><img src="image2.jpg" alt="Project 2"></div>
+    <div class="image-tile" onclick="openProject('project3', 'image3.jpg')"><img src="image3.jpg" alt="Project 3"></div>
+    <div class="image-tile" onclick="openProject('project4', 'image4.jpg')"><img src="image4.jpg" alt="Project 4"></div>
+</div>
 
 <!-- ========= FULLSCREEN CV VIEWER ========= -->
 <div id="cvFullscreen">
@@ -199,91 +290,39 @@ body.dark #darkModeToggle {
     <iframe src="Eska_Rashid_CV.pdf"></iframe>
 </div>
 
-<script>
+<!-- ========= LIGHTBOX ========= -->
+<div id="lightbox" onclick="closeLightbox()">
+    <div id="lightboxClose">×</div>
+    <img src="" alt="Large view">
+</div>
 
+<script>
 /* ========= SECTIONS ========= */
 const sections = {
-    about: `
-        <h2>About</h2>
-        <p>Eska Rashid is a Programme Leader specialising in Computing, Artificial Intelligence, 
-        and Technology Leadership. She has worked in computing education since 2004 and leads the 
-        AI & Tech CAPD project integrating AI innovations.</p>
-    `,
+    about: `<h2>About</h2><p>Eska Rashid is a Programme Leader specialising in Computing, Artificial Intelligence, and Technology Leadership. She has worked in computing education since 2004 and leads the AI & Tech CAPD project integrating AI innovations.</p>`,
+    qualifications: `<h2>Qualifications</h2><ul><li>MSc Information Systems Management – Distinction</li><li>PGCE Computing with QTS</li><li>BA (Hons) Interactive Multimedia</li></ul>`,
+    history: `<h2>Work History</h2><ul><li><strong>Programme Leader, Computing</strong> – Bath Spa University / ESL</li><li><strong>AI & Tech CAPD Project Lead</strong></li><li>Computing Lecturer – Multiple Institutions</li><li>AI Consultant – Outlier AI</li><li>Tech Representative Manager – University of Huddersfield</li></ul>`,
+    ambitions: `<h2>Ambitions</h2><ul><li>Advance AI-driven tools in higher education</li><li>Expand industry partnerships</li><li>Strengthen diversity & inclusion in technology</li><li>Lead innovative AI projects</li></ul>`,
+    technical: `<h2>Technical Skills</h2><div id="technicalSkills">
+        <div class="skill-tile">PHP</div><div class="skill-tile">SQL</div><div class="skill-tile">Python</div><div class="skill-tile">Java</div>
+        <div class="skill-tile">C#</div><div class="skill-tile">C++</div><div class="skill-tile">MySQL</div><div class="skill-tile">ASP.NET</div>
+        <div class="skill-tile">CSS</div><div class="skill-tile">Excel</div><div class="skill-tile">Access</div><div class="skill-tile">Google Suite</div>
+        <div class="skill-tile">Microsoft Apps</div><div class="skill-tile">Bootstrap</div><div class="skill-tile">Javascript</div><div class="skill-tile">HTML</div>
+        <div class="skill-tile">XML</div><div class="skill-tile">PostgreSQL</div><div class="skill-tile">Node.js</div><div class="skill-tile">Pandas</div>
+        <div class="skill-tile">Git</div><div class="skill-tile">MongoDB</div><div class="skill-tile">.NET</div><div class="skill-tile">Illustrator</div>
+        <div class="skill-tile">Google Sheets</div><div class="skill-tile">R</div><div class="skill-tile">Redis</div><div class="skill-tile">XAMPP</div>
+        <div class="skill-tile">Power BI</div><div class="skill-tile">DAX</div>
+    </div>`,
+    cv: `<h2>Curriculum Vitae</h2><p>Your CV automatically loads below:</p><iframe src="Eska_Rashid_CV.pdf" style="width:100%; height:600px; border-radius:12px; border:2px solid #999;"></iframe><br><br><button onclick="openFullscreenCV()" style="padding:16px 24px;font-size:1.2rem;border:none;border-radius:18px;font-weight:bold;cursor:pointer;margin-right:12px;box-shadow:3px 3px 10px var(--shadow);">Open Fullscreen</button><a href="Eska_Rashid_CV.pdf" download><button style="padding:16px 24px;font-size:1.2rem;border:none;border-radius:18px;font-weight:bold;cursor:pointer;box-shadow:3px 3px 10px var(--shadow);">Download CV</button></a>`,
+    contact: `<h2>Contact</h2><p><strong>Email:</strong> eska3210@gmail.com</p><p><strong>LinkedIn:</strong> linkedin.com/in/eska-rashid</p><p><strong>Mobile:</strong> 07776075490</p>`
+};
 
-    qualifications: `
-        <h2>Qualifications</h2>
-        <ul>
-            <li>MSc Information Systems Management – Distinction</li>
-            <li>PGCE Computing with QTS</li>
-            <li>BA (Hons) Interactive Multimedia</li>
-        </ul>
-    `,
-
-    history: `
-        <h2>Work History</h2>
-        <ul>
-            <li><strong>Programme Leader, Computing</strong> – Bath Spa University / ESL</li>
-            <li><strong>AI & Tech CAPD Project Lead</strong></li>
-            <li>Computing Lecturer – Multiple Institutions</li>
-            <li>AI Consultant – Outlier AI</li>
-            <li>Tech Representative Manager – University of Huddersfield</li>
-        </ul>
-    `,
-
-    ambitions: `
-        <h2>Ambitions</h2>
-        <ul>
-            <li>Advance AI-driven tools in higher education</li>
-            <li>Expand industry partnerships</li>
-            <li>Strengthen diversity & inclusion in technology</li>
-            <li>Lead innovative AI projects</li>
-        </ul>
-    `,
-
-    cv: `
-        <h2>Curriculum Vitae</h2>
-
-        <p>Your CV automatically loads below:</p>
-
-        <iframe 
-            src="Eska_Rashid_CV.pdf"
-            style="width:100%; height:600px; border-radius:12px; border:2px solid #999;">
-        </iframe>
-
-        <br><br>
-
-        <button onclick="openFullscreenCV()" style="
-            padding:16px 24px;
-            font-size:1.2rem;
-            border:none;
-            border-radius:18px;
-            background:var(--button-gradient);
-            font-weight:bold;
-            cursor:pointer;
-            margin-right:12px;
-            box-shadow:3px 3px 10px var(--shadow);
-        ">Open Fullscreen</button>
-
-        <a href="Eska_Rashid_CV.pdf" download>
-            <button style="
-                padding:16px 24px;
-                font-size:1.2rem;
-                border:none;
-                border-radius:18px;
-                background:var(--button-gradient);
-                font-weight:bold;
-                cursor:pointer;
-                box-shadow:3px 3px 10px var(--shadow);
-            ">Download CV</button>
-        </a>
-    `,
-
-    contact: `
-        <h2>Contact</h2>
-        <p><strong>Email:</strong> eska3210@gmail.com</p>
-        <p><strong>LinkedIn:</strong> linkedin.com/in/eska-rashid</p>
-        <p><strong>Mobile:</strong> 07776075490</p>
-    `
+/* ========= PROJECT SECTIONS ========= */
+const projects = {
+    project1: `<h2>Project 1</h2><p>This is an example description for Project 1. Include images, links, or details here.</p>`,
+    project2: `<h2>Project 2</h2><p>This is an example description for Project 2. Showcase your work or achievements here.</p>`,
+    project3: `<h2>Project 3</h2><p>This is an example description for Project 3. You can include code snippets or visuals.</p>`,
+    project4: `<h2>Project 4</h2><p>This is an example description for Project 4. Make it visually appealing and informative.</p>`
 };
 
 /* ========= LOAD SECTION ========= */
@@ -291,6 +330,26 @@ function openSection(name) {
     const box = document.getElementById("contentBox");
     box.style.display = "block";
     box.innerHTML = sections[name];
+    box.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* ========= OPEN PROJECT ========= */
+function openProject(name, imgSrc) {
+    const box = document.getElementById("contentBox");
+    box.style.display = "block";
+    box.innerHTML = projects[name] + `<p><strong>Click image below to view larger:</strong></p><img src="${imgSrc}" style="width:100%;max-width:400px;cursor:pointer;" onclick="openLightbox('${imgSrc}')">`;
+    box.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* ========= LIGHTBOX ========= */
+function openLightbox(src) {
+    const lightbox = document.getElementById("lightbox");
+    lightbox.style.display = "flex";
+    lightbox.querySelector("img").src = src;
+}
+function closeLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    lightbox.style.display = "none";
 }
 
 /* ========= DARK MODE ========= */
@@ -307,7 +366,6 @@ function openFullscreenCV() {
 function closeFullscreenCV() {
     document.getElementById("cvFullscreen").style.display = "none";
 }
-
 </script>
 
 </body>
