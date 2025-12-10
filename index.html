@@ -1,1 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eska Rashid – Portfolio</title>
 
+<style>
+/* ========= THEME VARIABLES ========= */
+
+:root {
+    --bg-light: #e6e6e6;
+    --bg-dark: #1d1d1d;
+
+    --text-light: #222;
+    --text-dark: #f1f1f1;
+
+    --metal-light: linear-gradient(145deg, #ffffff, #cfd1d3, #a8a8ab);
+    --metal-dark: linear-gradient(145deg, #3a3a3a, #2b2b2b, #1c1c1c);
+
+    --tile-light: linear-gradient(145deg, #f0f0f0, #c8c8c8, #a0a0a0);
+    --tile-dark: linear-gradient(145deg, #4a4a4a, #333, #222);
+
+    --highlight: #1e90ff;
+    --shadow: rgba(0,0,0,0.35);
+}
+
+/* DARK MODE TOGGLE CLASS */
+body.dark {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+body.dark header {
+    background: var(--metal-dark);
+}
+
+body.dark .menu-tile {
+    background: var(--tile-dark);
+    color: var(--text-dark);
+}
+
+body.dark #contentBox {
+    background: #2b2b2b;
+    color: var(--text-dark);
+    box-shadow: 4px 4px 14px black;
+}
+
+/* ========= GENERAL STYLING ========= */
+
+body {
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-light);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+}
+
+header {
+    text-align:center;
+    padding:25px;
+    width:100%;
+    background: var(--metal-light);
+    box-shadow: 0 6px 14px var(--shadow);
+    border-bottom: 2px solid #888;
+    animation: shine 4s linear infinite;
+}
+
+h1 {
+    margin:0;
+    font-size:2rem;
+    font-weight:bold;
+}
+
+/* ========= DARK MODE SWITCH ========= */
+#darkModeToggle {
+    position:absolute;
+    top:20px;
+    right:20px;
+    padding:10px 18px;
+    background: var(--tile-light);
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow: 3px 3px 10px var(--shadow);
+}
+body.dark #darkModeToggle {
+    background: var(--tile-dark);
+    color: var(--text-dark);
+}
+
+/* ========= MENU TILES ========= */
+
+#menuTiles {
+    margin-top:30px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    width:90%;
+}
+
+.menu-tile {
+    flex:1 1 240px;
+    padding:35px;
+    border-radius:24px;
+    background: var(--tile-light);
+    font-weight:bold;
+    text-align:center;
+    font-size:1.5rem;
+    cursor:pointer;
+    transition: transform .3s, box-shadow .3s, border .3s;
+    box-shadow: 3px 3px 14px var(--shadow);
+    animation: shine 6s linear infinite;
+}
+
+.menu-tile:hover {
+    transform:scale(1.08);
+    box-shadow: 0 0 18px var(--highlight), 3px 3px 14px var(--shadow);
+    border:3px solid var(--highlight);
+}
+
+/* ========= CONTENT BOX ========= */
+
+#contentBox {
+    margin-top:30px;
+    background:white;
+    padding:30px;
+    width:90%;
+    max-width:900px;
+    border-radius:20px;
+    box-shadow: 4px 4px 14px var(--shadow);
+    display:none;
+    animation: fadeIn .4s ease-in-out;
+}
+
+#contentBox h2 {
+    font-size:1.8rem;
+    margin-top:0;
+}
+
+#contentBox p, li {
+    font-size:1.2rem;
+    line-height:1.6rem;
+}
+
+/* ========= ANIMATIONS ========= */
+@keyframes shine {
+    0% { background-position:0% 50%; }
+    50% { background-position:100% 50%; }
+    100% { background-position:0% 50%; }
+}
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(10px);}
+    to {opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Eska Rashid – Programme Leader | AI & Tech Lead</h1>
+</header>
+
+<!-- DARK MODE BUTTON -->
+<div id="darkModeToggle" onclick="toggleDarkMode()">Dark Mode</div>
+
+<!-- MENU TILES -->
+<div id="menuTiles">
+    <div class="menu-tile" onclick="openSection('about')">About</div>
+    <div class="menu-tile" onclick="openSection('qualifications')">Qualifications</div>
+    <div class="menu-tile" onclick="openSection('history')">Work History</div>
+    <div class="menu-tile" onclick="openSection('ambitions')">Ambitions</div>
+    <div class="menu-tile" onclick="openSection('cv')">CV</div>
+    <div class="menu-tile" onclick="openSection('contact')">Contact</div>
+</div>
+
+<!-- CONTENT AREA -->
+<div id="contentBox"></div>
+
+<script>
+
+/* ========= SECTION CONTENT ========= */
+const sections = {
+    about: `
+        <h2>About</h2>
+        <p>Eska Rashid is a Programme Leader specialising in Computing, Artificial Intelligence, 
+        and Technology Leadership. She has worked in computing education since 2004 and leads the 
+        AI & Tech CAPD project integrating AI innovations into ESL learning.</p>
+    `,
+
+    qualifications: `
+        <h2>Qualifications</h2>
+        <ul>
+            <li>MSc Information Systems Management – Distinction</li>
+            <li>PGCE Computing with QTS</li>
+            <li>BA (Hons) Interactive Multimedia</li>
+        </ul>
+    `,
+
+    history: `
+        <h2>Work History</h2>
+        <ul>
+            <li><strong>Programme Leader, Computing</strong> – Bath Spa University / ESL</li>
+            <li><strong>AI & Tech CAPD Project Lead</strong></li>
+            <li>Computing Lecturer – Multiple Institutions</li>
+            <li>AI Consultant – Outlier AI</li>
+            <li>Tech Representative Manager – University of Huddersfield</li>
+            <li>Home Carer – 9 Years</li>
+        </ul>
+    `,
+
+    ambitions: `
+        <h2>Ambitions</h2>
+        <ul>
+            <li>Advance AI-driven tools in higher education</li>
+            <li>Expand industry partnerships for computing students</li>
+            <li>Strengthen diversity & inclusion in technology</li>
+            <li>Lead innovative AI projects supporting ESL learners</li>
+        </ul>
+    `,
+
+    cv: `
+        <h2>Curriculum Vitae</h2>
+        <p>Your CV automatically loads below:</p>
+        <iframe src="Eska_Rashid_CV.docx" 
+                style="width:100%; height:600px; border-radius:12px; border:2px solid #999;">
+        </iframe>
+
+        <br><br>
+        <a href="Eska_Rashid_CV.docx" download>
+            <button style="
+                padding:16px 24px;
+                font-size:1.2rem;
+                border:none;
+                border-radius:18px;
+                background:var(--button-gradient);
+                font-weight:bold;
+                cursor:pointer;
+                box-shadow:3px 3px 10px var(--shadow);
+                ">Download CV</button>
+        </a>
+    `,
+
+    contact: `
+        <h2>Contact</h2>
+        <p><strong>Email:</strong> eska3210@gmail.com</p>
+        <p><strong>LinkedIn:</strong> linkedin.com/in/eska-rashid</p>
+        <p><strong>Mobile:</strong> 07776075490</p>
+    `
+};
+
+/* ========= DISPLAY SECTION ========= */
+function openSection(name) {
+    const box = document.getElementById("contentBox");
+    box.style.display = "block";
+    box.innerHTML = sections[name];
+}
+
+/* ========= DARK MODE TOGGLE ========= */
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+    document.getElementById("darkModeToggle").textContent =
+        document.body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
+}
+
+</script>
+
+</body>
+</html>
