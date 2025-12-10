@@ -6,105 +6,62 @@
 <title>Eska Rashid – Portfolio</title>
 <style>
 :root {
-    --bg-light: #e6e6e6;
-    --bg-dark: #1d1d1d;
-    --text-light: #222;
-    --text-dark: #f1f1f1;
-    --tile-light: linear-gradient(145deg, #f0f0f0, #c8c8c8, #a0a0a0);
-    --tile-dark: linear-gradient(145deg, #4a4a4a, #333, #222);
-    --highlight: #1e90ff;
-    --shadow: rgba(0,0,0,0.35);
+    --bg-light:#e6e6e6;
+    --bg-dark:#1d1d1d;
+    --text-light:#222;
+    --text-dark:#f1f1f1;
+    --tile-light:linear-gradient(145deg,#f0f0f0,#c8c8c8,#a0a0a0);
+    --tile-dark:linear-gradient(145deg,#4a4a4a,#333,#222);
+    --highlight:#1e90ff;
+    --shadow:rgba(0,0,0,0.35);
 }
 
-body {
-    margin:0; font-family:'Segoe UI',sans-serif; background:var(--bg-light); color:var(--text-light);
-}
-body.dark { background: var(--bg-dark); color: var(--text-dark);}
-body.dark .menu-tile, body.dark .expandable, body.dark #bioPanel { background: var(--tile-dark); color: var(--text-dark); }
+body{margin:0;font-family:'Segoe UI',sans-serif;background:var(--bg-light);color:var(--text-light);}
+body.dark{background:var(--bg-dark);color:var(--text-dark);}
+body.dark .menu-tile,body.dark .expandable,body.dark #bioPanel{background:var(--tile-dark);color:var(--text-dark);}
 
-header {
-    text-align:center; padding:25px; width:100%; background: var(--tile-light);
-    box-shadow:0 6px 14px var(--shadow); border-bottom:2px solid #888;
-}
-h1 { margin:0; font-size:2rem; font-weight:bold; }
+header{text-align:center;padding:25px;width:100%;background:var(--tile-light);box-shadow:0 6px 14px var(--shadow);border-bottom:2px solid #888;}
+h1{margin:0;font-size:2rem;font-weight:bold;}
 
-#darkModeToggle {
-    position:absolute; top:20px; right:20px; padding:10px 18px; background: var(--tile-light);
-    border-radius:12px; cursor:pointer; font-weight:bold; box-shadow:3px 3px 10px var(--shadow);
-}
-body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark); }
+#darkModeToggle{position:absolute;top:20px;right:20px;padding:10px 18px;background:var(--tile-light);border-radius:12px;cursor:pointer;font-weight:bold;box-shadow:3px 3px 10px var(--shadow);}
+body.dark #darkModeToggle{background:var(--tile-dark);color:var(--text-dark);}
 
-/* Menu Tiles Row */
-#menuTiles {
-    display:flex; flex-wrap:wrap; justify-content:center; gap:20px; width:95%; margin:20px auto;
-}
-.menu-tile {
-    padding:40px; border-radius:24px; background: var(--tile-light);
-    font-weight:bold; text-align:center; font-size:1.6rem; cursor:pointer;
-    transition: transform .3s, box-shadow .3s, border .3s;
-    box-shadow: 3px 3px 16px var(--shadow);
-}
-.menu-tile:hover { transform:scale(1.08); box-shadow:0 0 20px var(--highlight), 3px 3px 16px var(--shadow); border:3px solid var(--highlight); }
+/* Main menu tiles */
+#menuTiles{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;width:95%;margin:20px auto;}
+.menu-tile{padding:50px;border-radius:24px;background:var(--tile-light);font-weight:bold;text-align:center;font-size:1.7rem;cursor:pointer;transition:transform .3s,box-shadow .3s,border .3s;box-shadow:3px 3px 16px var(--shadow);}
+.menu-tile:hover{transform:scale(1.08);box-shadow:0 0 20px var(--highlight),3px 3px 16px var(--shadow);border:3px solid var(--highlight);}
 
-/* Row 2 Layout */
-#profileSection {
-    display:flex; justify-content:center; align-items:flex-start; gap:50px; margin:50px 20px; flex-wrap:wrap;
-}
+/* Profile section layout */
+#profileSection{display:flex;justify-content:center;align-items:flex-start;gap:50px;margin:50px 20px;flex-wrap:wrap;}
 
 /* Side Tiles */
-.sideTile {
-    flex:1; max-width:400px; display:flex; flex-direction:column; gap:20px;
-}
-.sideTile .tileHeader {
-    font-size:1.6rem; font-weight:bold; text-align:center; padding:25px; border-radius:16px;
-    background:var(--tile-light); cursor:pointer; box-shadow: 3px 3px 14px var(--shadow);
-    transition: transform .3s, box-shadow .3s;
-}
-.sideTile .tileHeader:hover { transform:scale(1.05); box-shadow:0 0 20px var(--highlight), 3px 3px 14px var(--shadow); }
+.sideTile{flex:1;max-width:400px;display:flex;flex-direction:column;gap:20px;}
+.sideTile .tileHeader{font-size:1.6rem;font-weight:bold;text-align:center;padding:25px;border-radius:16px;background:var(--tile-light);cursor:pointer;box-shadow:3px 3px 14px var(--shadow);transition:transform .3s,box-shadow .3s;}
+.sideTile .tileHeader:hover{transform:scale(1.05);box-shadow:0 0 20px var(--highlight),3px 3px 14px var(--shadow);}
+.expandable{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.5s ease;background:var(--tile-light);padding:0 20px;border-radius:12px;box-shadow:2px 2px 10px var(--shadow);font-size:0.95rem;line-height:1.5;text-align:left;}
+.expandable.show{padding:20px;max-height:2000px;overflow:auto;}
+.expandable-content{max-height:700px;overflow-y:auto;padding-right:10px;}
 
-.expandable {
-    max-height:0; overflow:hidden; transition:max-height 0.5s ease, padding 0.5s ease;
-    background: var(--tile-light); padding:0 20px; border-radius:12px; box-shadow:2px 2px 10px var(--shadow); font-size:0.95rem; line-height:1.5; text-align:left;
-}
-.expandable.show { padding:20px; max-height:2000px; }
+/* Profile image center */
+#profileTile{flex:0 0 200px;display:flex;flex-direction:column;align-items:center;cursor:pointer;text-align:center;}
+#profileTile img{width:180px;border-radius:20px;transition:transform .3s;}
+#profileTile img:hover{transform:scale(1.05);}
+#bioPanel{max-height:0;overflow:auto;transition:max-height 0.5s ease,padding 0.5s ease;background:var(--tile-light);padding:0 20px;border-radius:12px;box-shadow:2px 2px 10px var(--shadow);font-size:0.95rem;line-height:1.5;text-align:left;}
+#bioPanel.show{padding:20px;max-height:700px;overflow:auto;}
 
-.expandable-content {
-    max-height:800px; overflow-y:auto; padding-right:10px;
-}
+/* Technical subtiles */
+.technical-tiles{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;}
+.technical-tiles div{padding:10px 15px;border-radius:12px;background:var(--tile-light);box-shadow:2px 2px 10px var(--shadow);font-size:0.95rem;transition:transform .3s,box-shadow .3s;cursor:pointer;}
+.technical-tiles div:hover{transform:scale(1.05);box-shadow:0 0 12px var(--highlight),2px 2px 10px var(--shadow);}
 
-/* Center Image */
-#profileTile {
-    flex:0 0 250px; display:flex; flex-direction:column; align-items:center; cursor:pointer; text-align:center;
-}
-#profileTile img { width:180px; border-radius:20px; transition: transform .3s; }
-#profileTile img:hover { transform: scale(1.05); }
-#bioPanel {
-    max-height:0; overflow:auto; transition:max-height 0.5s ease, padding 0.5s ease;
-    background: var(--tile-light); padding:0 20px; border-radius:12px; box-shadow:2px 2px 10px var(--shadow); font-size:0.95rem; line-height:1.5; text-align:left;
-}
-#bioPanel.show { padding:20px; max-height:800px; }
-
-/* Subtiles inside Technical */
-.technical-tiles {
-    display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;
-}
-.technical-tiles div {
-    padding:10px 15px; border-radius:12px; background: var(--tile-light); box-shadow:2px 2px 10px var(--shadow); font-size:0.95rem;
-    transition: transform .3s, box-shadow .3s;
-    cursor:pointer;
-}
-.technical-tiles div:hover { transform:scale(1.05); box-shadow:0 0 12px var(--highlight), 2px 2px 10px var(--shadow); }
-
-/* Content Box Next to Tiles */
-#contentBox {
-    margin:20px; padding:20px; background: var(--tile-light); border-radius:16px; box-shadow:2px 2px 12px var(--shadow); max-height:500px; overflow:auto;
-}
+/* Content Box next to menu tiles */
+#contentBox{margin:20px;padding:20px;background:var(--tile-light);border-radius:16px;box-shadow:2px 2px 12px var(--shadow);max-height:500px;overflow:auto;}
 
 /* Responsive */
 @media(max-width:1200px){
-    #profileSection { flex-direction:column; align-items:center; gap:30px; }
-    .sideTile { max-width:90%; }
-    #profileTile { flex:0 0 auto; }
+    #profileSection{flex-direction:column;align-items:center;gap:30px;}
+    .sideTile{max-width:90%;}
+    #profileTile{flex:0 0 auto;}
 }
 </style>
 </head>
@@ -129,7 +86,7 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
 
 <!-- Row 2: Profile Section -->
 <div id="profileSection">
-    <!-- Left Personal Statement -->
+    <!-- Left: Personal Statement -->
     <div class="sideTile">
         <div class="tileHeader" onclick="toggleExpandable('personalPanel')">Personal Statement</div>
         <div id="personalPanel" class="expandable">
@@ -153,12 +110,12 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
         </div>
     </div>
 
-    <!-- Right Testimonials -->
+    <!-- Right: Testimonials -->
     <div class="sideTile">
         <div class="tileHeader" onclick="toggleExpandable('testimonialPanel')">Testimonials</div>
         <div id="testimonialPanel" class="expandable">
             <div class="expandable-content">
-                <p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses in a standardized format...”</p>
+                <p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses...”</p>
                 <p>"Working under Eska Rashid's leadership on the AI project has been a good experience..."</p>
                 <p>“Collaborating with Eska Rashid on the AI project has been an exceptional experience...”</p>
                 <p>“Eska’s ability to transform ambitious ideas into actionable plans, all while fostering a collaborative and inspired team environment...”</p>
@@ -172,11 +129,11 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
     </div>
 </div>
 
-<!-- Content Box Next to Tiles -->
+<!-- Content Box -->
 <div id="contentBox"></div>
 
 <script>
-const sections = {
+const sections={
     about:`<p>Eska Rashid is a Programme Leader specialising in Computing, AI & Technology Leadership.</p>`,
     qualifications:`<ul><li>MSc Information Systems Management – Distinction</li><li>PGCE Computing with QTS</li><li>BA (Hons) Interactive Multimedia</li></ul>`,
     history:`<ul><li>Programme Leader, Computing – Bath Spa University / ESL</li><li>AI & Tech CAPD Project Lead</li><li>Computing Lecturer – Multiple Institutions</li></ul>`,
@@ -213,6 +170,5 @@ function openFullscreenCV(){
     cvWin.focus();
 }
 </script>
-
 </body>
 </html>
