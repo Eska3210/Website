@@ -123,7 +123,7 @@ body.dark #darkModeToggle {
 #contentBox h2 { font-size:1.8rem; margin-top:0; }
 #contentBox p, li { font-size:1.2rem; line-height:1.6rem; }
 
-/* ========= IMAGE TILES ========= */
+/* ========= IMAGE TILE ========= */
 #imageTiles {
     margin-top:40px;
     display:flex;
@@ -134,7 +134,7 @@ body.dark #darkModeToggle {
 }
 
 .image-tile {
-    flex:1 1 120px;
+    flex:1 1 240px;
     border-radius:20px;
     overflow:hidden;
     cursor:pointer;
@@ -212,7 +212,7 @@ body.dark #darkModeToggle {
     font-weight:bold;
 }
 
-/* ========= LIGHTBOX FOR IMAGES ========= */
+/* ========= LIGHTBOX ========= */
 #lightbox {
     display:none;
     position:fixed;
@@ -276,12 +276,11 @@ body.dark #darkModeToggle {
 
 <div id="contentBox"></div>
 
-<!-- ========= IMAGE TILES ========= -->
+<!-- ========= IMAGE TILE ========= -->
 <div id="imageTiles">
-    <div class="image-tile" onclick="openProject('project1', 'image1.jpg')"><img src="image1.jpg" alt="Project 1"></div>
-    <div class="image-tile" onclick="openProject('project2', 'image2.jpg')"><img src="image2.jpg" alt="Project 2"></div>
-    <div class="image-tile" onclick="openProject('project3', 'image3.jpg')"><img src="image3.jpg" alt="Project 3"></div>
-    <div class="image-tile" onclick="openProject('project4', 'image4.jpg')"><img src="image4.jpg" alt="Project 4"></div>
+    <div class="image-tile" onclick="openProject('profile', 'https://raw.githubusercontent.com/Eska3210/Website/main/Eska%20Rashid%20photo%20PNG.png')">
+        <img src="https://raw.githubusercontent.com/Eska3210/Website/main/Eska%20Rashid%20photo%20PNG.png" alt="Eska Rashid">
+    </div>
 </div>
 
 <!-- ========= FULLSCREEN CV VIEWER ========= -->
@@ -317,12 +316,9 @@ const sections = {
     contact: `<h2>Contact</h2><p><strong>Email:</strong> eska3210@gmail.com</p><p><strong>LinkedIn:</strong> linkedin.com/in/eska-rashid</p><p><strong>Mobile:</strong> 07776075490</p>`
 };
 
-/* ========= PROJECT SECTIONS ========= */
+/* ========= PROJECT SECTION ========= */
 const projects = {
-    project1: `<h2>Project 1</h2><p>This is an example description for Project 1. Include images, links, or details here.</p>`,
-    project2: `<h2>Project 2</h2><p>This is an example description for Project 2. Showcase your work or achievements here.</p>`,
-    project3: `<h2>Project 3</h2><p>This is an example description for Project 3. You can include code snippets or visuals.</p>`,
-    project4: `<h2>Project 4</h2><p>This is an example description for Project 4. Make it visually appealing and informative.</p>`
+    profile: `<h2>Eska Rashid</h2><p>This is Eska Rashid’s profile image.</p><img src="https://raw.githubusercontent.com/Eska3210/Website/main/Eska%20Rashid%20photo%20PNG.png" style="width:100%;max-width:400px;border-radius:20px;">`
 };
 
 /* ========= LOAD SECTION ========= */
@@ -337,7 +333,7 @@ function openSection(name) {
 function openProject(name, imgSrc) {
     const box = document.getElementById("contentBox");
     box.style.display = "block";
-    box.innerHTML = projects[name] + `<p><strong>Click image below to view larger:</strong></p><img src="${imgSrc}" style="width:100%;max-width:400px;cursor:pointer;" onclick="openLightbox('${imgSrc}')">`;
+    box.innerHTML = projects[name];
     box.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
