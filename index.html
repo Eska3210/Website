@@ -121,7 +121,6 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
 <div id="profileSection">
     <div class="sideTiles">
         <div class="menu-tile" onclick="openSection('personal')">Personal Statement</div>
-        <div class="menu-tile" onclick="openSection('testimonials')">Testimonials</div>
     </div>
 
     <div id="profileTile" onclick="toggleBio()">
@@ -129,7 +128,6 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
     </div>
 
     <div class="sideTiles">
-        <div class="menu-tile" onclick="openSection('personal')">Personal Statement</div>
         <div class="menu-tile" onclick="openSection('testimonials')">Testimonials</div>
     </div>
 </div>
@@ -163,13 +161,8 @@ const sections = {
         <div class="skill-tile">Google Sheets</div><div class="skill-tile">R</div><div class="skill-tile">Redis</div><div class="skill-tile">XAMPP</div>
         <div class="skill-tile">Power BI</div><div class="skill-tile">DAX</div>
     </div>`,
-    personal:`<p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership. This combined experience has given me the skills and knowledge to excel as a Computing Lecturer and Programme Lead, interviewing, training, mentoring and leading Computer Science Lecturers.<br><br>
-    Increasing my professional network, I have established valuable connections with industry leaders from Lloyds Bank, Yorkshire Water, CalderIT, Future Transformations, Hippo, Answer Digital, Parall.ax and more. This provides guest speaker opportunities and real-world insights.<br><br>
-    I actively attend live webinars on AI, robotics and emerging technologies to stay ahead of the curve and incorporate these advancements into teaching. My leadership skills were built at Huddersfield University's laptop rental service. Achieving a distinction in my MSc Computer Science programme, I consistently excelled, gaining leadership skills and resilience.</p>`,
-    testimonials:`<p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses...” Ayodeji Triola Computing Lecturer, AI team member December 2024<br><br>
-    "Working under Eska Rashid's leadership on the AI project has been a good experience..." Khurram Asif Computing Lecturer, AI team member December 2024<br><br>
-    “Collaborating with Eska Rashid on the AI project has been an exceptional experience...” Hriday Grover Computing Lecturer, AI team member December 2024<br><br>
-    “Eska’s ability to transform ambitious ideas into actionable plans...” Muhsin Hassanu Computing Lecturer, AI team member December 2024</p>`,
+    personal:`<p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership...</p>`,
+    testimonials:`<p>“Eska is a dedicated and committed leader...” Ayodeji Triola<br><br>“Working under Eska Rashid's leadership...” Khurram Asif<br><br>“Collaborating with Eska Rashid...” Hriday Grover<br><br>“Eska’s ability to transform ambitious ideas...” Muhsin Hassanu</p>`,
     cv:`<p>Your CV automatically loads below:</p><button onclick="openFullscreenCV()">Open Fullscreen</button><a href="Eska_Rashid_CV.pdf" download><button>Download CV</button></a>`,
     contact:`<p>Email: eska3210@gmail.com</p><p>LinkedIn: linkedin.com/in/eska-rashid</p><p>Mobile: 07776075490</p>`
 };
