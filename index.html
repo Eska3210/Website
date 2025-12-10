@@ -75,6 +75,23 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
 #profileTile img { width:250px; border-radius:20px; transition: transform .3s;}
 #profileTile img:hover { transform: scale(1.05); }
 
+/* Expandable panels */
+.expandable {
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.5s ease;
+    background: var(--tile-light);
+    padding:0 20px;
+    border-radius:12px;
+    box-shadow:2px 2px 10px var(--shadow);
+    font-size:0.95rem;
+    line-height:1.5;
+}
+.expandable.show {
+    padding:20px;
+    max-height:800px; /* enough to fit full content */
+}
+
 /* Bio container scrollable */
 #bioBox {
     display:none; max-width:700px; font-size:0.95rem; line-height:1.5; margin-top:15px;
@@ -129,21 +146,22 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
 <!-- ========= PROFILE + SIDE TILES ========= -->
 <div id="profileSection">
     <div class="sideTiles">
-        <div class="menu-tile" onclick="openSection('personal')">Personal Statement</div>
+        <div class="menu-tile" onclick="toggleExpandable('personalPanel')">Personal Statement</div>
+        <div id="personalPanel" class="expandable">
+            <p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership...</p>
+        </div>
     </div>
 
-    <div id="profileTile" onclick="toggleBio()">
+    <div id="profileTile">
         <img src="https://raw.githubusercontent.com/Eska3210/Website/main/Eska%20Rashid%20photo%20PNG.png" alt="Eska Rashid">
     </div>
 
     <div class="sideTiles">
-        <div class="menu-tile" onclick="openSection('testimonials')">Testimonials</div>
+        <div class="menu-tile" onclick="toggleExpandable('testimonialPanel')">Testimonials</div>
+        <div id="testimonialPanel" class="expandable">
+            <p>“Eska is a dedicated and committed leader...” Ayodeji Triola<br><br>“Working under Eska Rashid's leadership...” Khurram Asif<br><br>“Collaborating with Eska Rashid...” Hriday Grover<br><br>“Eska’s ability to transform ambitious ideas...” Muhsin Hassanu</p>
+        </div>
     </div>
-</div>
-
-<div id="bioBox">
-<!-- Bio content will show here when clicking image -->
-<p>Professional Overview: Eska Rashid is a Programme Leader specialising in Computing, with a dedicated focus on Artificial Intelligence (AI) and Technology Leadership. Eska became a computing Lecturer in 2004 and has always been dedicated to computer science...</p>
 </div>
 
 <div id="contentBox"></div>
@@ -165,8 +183,6 @@ const sections = {
     history:`<ul><li>Programme Leader, Computing – Bath Spa University / ESL</li><li>AI & Tech CAPD Project Lead</li><li>Computing Lecturer – Multiple Institutions</li><li>AI Consultant – Outlier AI</li><li>Tech Representative Manager – University of Huddersfield</li></ul>`,
     ambitions:`<ul><li>Advance AI-driven tools in higher education</li><li>Expand industry partnerships</li><li>Strengthen diversity & inclusion in technology</li><li>Lead innovative AI projects</li></ul>`,
     technical:`<div id="technicalSkills"><div class="skill-tile">PHP</div><div class="skill-tile">SQL</div><div class="skill-tile">Python</div><div class="skill-tile">Java</div><div class="skill-tile">C#</div><div class="skill-tile">C++</div><div class="skill-tile">MySQL</div><div class="skill-tile">ASP.NET</div><div class="skill-tile">CSS</div><div class="skill-tile">Excel</div><div class="skill-tile">Access</div><div class="skill-tile">Google Suite</div><div class="skill-tile">Microsoft Apps</div><div class="skill-tile">Bootstrap</div><div class="skill-tile">Javascript</div><div class="skill-tile">HTML</div><div class="skill-tile">XML</div><div class="skill-tile">PostgreSQL</div><div class="skill-tile">Node.js</div><div class="skill-tile">Pandas</div><div class="skill-tile">Git</div><div class="skill-tile">MongoDB</div><div class="skill-tile">.NET</div><div class="skill-tile">Illustrator</div><div class="skill-tile">Google Sheets</div><div class="skill-tile">R</div><div class="skill-tile">Redis</div><div class="skill-tile">XAMPP</div><div class="skill-tile">Power BI</div><div class="skill-tile">DAX</div></div>`,
-    personal:`<p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership. This combined experience has given me the skills and knowledge to excel as a Computing Lecturer and Programme Lead...</p>`,
-    testimonials:`<p>“Eska is a dedicated and committed leader...” Ayodeji Triola<br><br>“Working under Eska Rashid's leadership...” Khurram Asif<br><br>“Collaborating with Eska Rashid...” Hriday Grover<br><br>“Eska’s ability to transform ambitious ideas...” Muhsin Hassanu</p>`,
     cv:`<p>Your CV automatically loads below:</p><button onclick="openFullscreenCV()">Open Fullscreen</button><a href="Eska_Rashid_CV.pdf" download><button>Download CV</button></a>`,
     contact:`<p>Email: eska3210@gmail.com</p><p>LinkedIn: linkedin.com/in/eska-rashid</p><p>Mobile: 07776075490</p>`
 };
@@ -178,9 +194,9 @@ function openSection(name){
     box.scrollIntoView({behavior:"smooth"});
 }
 
-function toggleBio(){
-    const bio=document.getElementById("bioBox");
-    bio.style.display=(bio.style.display==="none"||bio.style.display==="")?"block":"none";
+function toggleExpandable(id){
+    const panel=document.getElementById(id);
+    panel.classList.toggle('show');
 }
 
 function toggleDarkMode(){
