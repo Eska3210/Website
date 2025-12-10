@@ -18,7 +18,7 @@
 
 body{margin:0;font-family:'Segoe UI',sans-serif;background:var(--bg-light);color:var(--text-light);}
 body.dark{background:var(--bg-dark);color:var(--text-dark);}
-body.dark .menu-tile,body.dark .expandable,body.dark #bioPanel{background:var(--tile-dark);color:var(--text-dark);}
+body.dark .menu-tile, body.dark .expandable, body.dark #bioPanel{background:var(--tile-dark);color:var(--text-dark);}
 
 header{text-align:center;padding:25px;width:100%;background:var(--tile-light);box-shadow:0 6px 14px var(--shadow);border-bottom:2px solid #888;}
 h1{margin:0;font-size:2rem;font-weight:bold;}
@@ -35,7 +35,7 @@ body.dark #darkModeToggle{background:var(--tile-dark);color:var(--text-dark);}
 #profileSection{display:flex;justify-content:center;align-items:flex-start;gap:50px;margin:50px 20px;flex-wrap:wrap;}
 
 /* Side Tiles */
-.sideTile{flex:1;max-width:300px;display:flex;flex-direction:column;gap:20px;}
+.sideTile{flex:1;max-width:350px;display:flex;flex-direction:column;gap:20px;}
 .sideTile .tileHeader{font-size:1.6rem;font-weight:bold;text-align:center;padding:25px;border-radius:16px;background:var(--tile-light);cursor:pointer;box-shadow:3px 3px 14px var(--shadow);transition:transform .3s,box-shadow .3s;}
 .sideTile .tileHeader:hover{transform:scale(1.05);box-shadow:0 0 20px var(--highlight),3px 3px 14px var(--shadow);}
 .expandable{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.5s ease;background:var(--tile-light);padding:0 20px;border-radius:12px;box-shadow:2px 2px 10px var(--shadow);font-size:0.95rem;line-height:1.5;text-align:left;}
@@ -44,7 +44,7 @@ body.dark #darkModeToggle{background:var(--tile-dark);color:var(--text-dark);}
 
 /* Profile image center */
 #profileTile{flex:0 0 220px;display:flex;flex-direction:column;align-items:center;cursor:pointer;text-align:center;}
-#profileTile img{width:180px;border-radius:20px;transition:transform .3s;}
+#profileTile img{width:150px;border-radius:20px;transition:transform .3s;}
 #profileTile img:hover{transform:scale(1.05);}
 #bioPanel{max-height:0;overflow:auto;transition:max-height 0.5s ease,padding 0.5s ease;background:var(--tile-light);padding:0 20px;border-radius:12px;box-shadow:2px 2px 10px var(--shadow);font-size:0.95rem;line-height:1.5;text-align:left;}
 #bioPanel.show{padding:20px;max-height:700px;overflow:auto;}
@@ -95,11 +95,11 @@ body.dark #darkModeToggle{background:var(--tile-dark);color:var(--text-dark);}
         <div class="tileHeader" onclick="toggleExpandable('personalPanel')">Personal Statement</div>
         <div id="personalPanel" class="expandable">
             <div class="expandable-content">
-                <p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership...</p>
-                <p>Increasing my professional network, I have established valuable connections with industry leaders...</p>
-                <p>I am an avid learner, actively attending live webinars on AI, robotics and emerging technologies...</p>
-                <p>My leadership skills were built at Huddersfield University's laptop rental service...</p>
-                <p>Achieving a distinction in my MSc Computer Science programme, I consistently excelled amongst my all-male cohort...</p>
+                <p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership. This combined experience has given me the skills and knowledge to excel as a Computing Lecturer and Programme Lead, interviewing, training, mentoring and leading Computer Science Lecturers.</p>
+                <p>Increasing my professional network, I have established valuable connections with industry leaders from Lloyds Bank, Yorkshire Water, CalderIT, Future Transformations, Hippo, Answer Digital, Parall.ax and more. These connections not only provide guest speaker opportunities for students but also offer real-world insights into current trends and career paths.</p>
+                <p>I am an avid learner, actively attending live webinars on AI, robotics and emerging technologies to stay ahead of the curve and incorporate these advancements into my teaching. I also attend tech events to further this learning and being part of tech groups.</p>
+                <p>My leadership skills were built at Huddersfield University's laptop rental service. For four years, I managed every aspect of the scheme, from overseeing staff and ensuring smooth operations at University of Huddersfield campus. This experience instilled in me invaluable skills in project management, team building, and navigating complex organisational structures. More importantly, it taught me the power of collaboration with senior university leaders to achieve ambitious goals.</p>
+                <p>Achieving a distinction in my MSc Computer Science programme, I consistently excelled amongst my all-male cohort, securing high grades. Navigating a highly competitive environment gave me leadership skills, resilience, and ability to excel under pressure, qualities I translate in lecturing to effectively guide and challenge students. Thriving in such an environment further motivated me to build an inclusive learning environment where all students, regardless of background, can excel.</p>
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@ body.dark #darkModeToggle{background:var(--tile-dark);color:var(--text-dark);}
         <img src="https://raw.githubusercontent.com/Eska3210/Website/main/Eska%20Rashid%20photo%20PNG.png" alt="Eska Rashid">
         <div id="bioPanel">
             <div class="expandable-content">
-                <p>Professional Overview: Eska Rashid is a Programme Leader specialising in Computing, with a dedicated focus on Artificial Intelligence (AI) and Technology Leadership...</p>
+                <p>Professional Overview: Eska Rashid is a Programme Leader specialising in Computing, with a dedicated focus on Artificial Intelligence (AI) and Technology Leadership. Eska became a computing Lecturer in 2004 and has always been dedicated to computer science. Eska holds an MSc with Distinction in Computer Science. As the Programme Leader for Computer Science for Bath Spa University, Eska oversees the development and delivery of computer science that prepares students for the rapidly evolving tech industry. She is also leading an AI and Tech project in integrating AI into ESL, ensuring that students gain hands-on experience with the latest technologies and methodologies. In her role as AI & Tech Lead, Eska drives initiatives aimed at making use of advancing AI research and application within the institution. She collaborates with industry partners to create opportunities for student engagement in real-world projects, bridging the gap between academia and industry. She also uses her industry contacts for her AI role that provide insightful and valuable feedback. Eska has built partnerships with leading tech companies, providing students with placements, workshops, opportunities. For student success, Eska has mentored students who have gone on to secure positions at Lloyds Banking Group. Eska is deeply committed to promoting diversity and inclusion within the tech field. She actively participates in initiatives aimed at encouraging underrepresented groups to pursue careers in computing and AI. Her teaching philosophy emphasises hands-on learning, critical thinking, and the implications of AI, ensuring that her students are not only skilled technologists but also responsible innovators. Eska Rashid’s dedication to excellence in computing education and her visionary leadership in AI make her a pivotal figure in shaping the future of technology and innovation.</p>
             </div>
         </div>
     </div>
@@ -119,15 +119,17 @@ body.dark #darkModeToggle{background:var(--tile-dark);color:var(--text-dark);}
         <div class="tileHeader" onclick="toggleExpandable('testimonialPanel')">Testimonials</div>
         <div id="testimonialPanel" class="expandable">
             <div class="expandable-content">
-                <p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses...”</p>
-                <p>"Working under Eska Rashid's leadership on the AI project has been a good experience..."</p>
-                <p>“Collaborating with Eska Rashid on the AI project has been an exceptional experience...”</p>
-                <p>“Eska’s ability to transform ambitious ideas into actionable plans, all while fostering a collaborative and inspired team environment...”</p>
-                <p>“Eska has a remarkable ability to turn ambitious ideas into clear, actionable plans while creating a collaborative and inspiring team environment...”</p>
-                <p>“Eska has demonstrated exceptional leadership and vision across the projects she has led...”</p>
-                <p>“Eska has outstanding leadership , expertly aligning technical expertise with a strong understanding of student and curriculum needs...”</p>
-                <p>“Working with Eska, I can learn how to manage and lead the group...”</p>
-                <p>“Eska’s leadership and capabilities have been pivotal in driving the AI project forward...”</p>
+                <p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses in a standardized format. She actively supports lecturers by providing them with the necessary resources. Eska keeps every team member informed about current activities and future goals, fostering a collaborative and transparent environment. She also organizes tech events and promotes a student-led learning approach, encouraging autonomy and innovation among students.” Ayodeji Triola Computing Lecturer, AI team member December 2024</p>
+                <p>"Working under Eska Rashid's leadership on the AI project has been a good experience. Her vision for integrating AI to enhance learning, particularly for ESL students, is truly inspiring. From the outset, Eska demonstrated a unique ability to blend technical expertise with a deep understanding of students' needs, ensuring that every decision we made was both innovative and impactful." Khurram Asif Computing Lecturer, AI team member December 2024</p>
+                <p>“Collaborating with Eska Rashid on the AI project has been an exceptional experience. Her innovative vision for harnessing AI to transform learning, especially for ESL students, is both ambitious and inspiring. From the start, Eska exhibited remarkable leadership, seamlessly merging technical acumen with a profound understanding of educational needs, ensuring that every aspect of the project was impactful and future-focused.” Hriday Grover Computing Lecturer, AI team member December 2024</p>
+                <p>“Eska’s ability to transform ambitious ideas into actionable plans, all while fostering a collaborative and inspired team environment, highlights her unparalleled leadership capabilities. Being part of a project under her guidance was a privilege, as her commitment to innovation and meaningful progress left a lasting impact. She exemplifies what it means to lead with clarity, passion, and purpose, setting a benchmark for excellence in the realms of technology and education.” Muhsin Hassanu Computing Lecturer, AI team member December 2024</p>
+                <p>“Eska has a remarkable ability to turn ambitious ideas into clear, actionable plans while creating a collaborative and inspiring team environment. Working on a project with her was a privilege, as her dedication to innovation and progress made a lasting impact. She leads with clarity, passion, and purpose, setting a high standard for excellence in both technology and education.” Sohail Ilyas Computing Lecturer, AI team member December 2024</p>
+                <p>“Eska has demonstrated exceptional leadership and vision across the projects she has led, including the AI Project and BSU COMP PL. Her ability to integrate technical expertise with a deep understanding of student needs has been integral in ensuring that the projects deliver both innovative solutions and meaningful impact for our learners...</p>
+                <p>Eska's ability to drive complex projects from conception to successful implementation, while maintaining team motivation and alignment with strategic goals, is a testament to her exceptional leadership skills. Her focus on real-world applications ensures that the solutions developed are not only theoretically sound but are also practically beneficial for students...</p>
+                <p>Eska continues to set high standards for leadership in technology and education, and her dedication to both innovation and positive change inspires everyone fortunate enough to work with her...</p>
+                <p>“Eska has outstanding leadership , expertly aligning technical expertise with a strong understanding of student and curriculum needs. Her commitment to inclusivity and collaboration has ensured the development of accessible, innovative solutions that deliver meaningful impact for learners. Eska’s ability to drive programme success while fostering a supportive and motivated team highlights her exceptional leadership in education and technology.” Mazhar Malik Computing Lecturer, AI team member December 2024</p>
+                <p>“Working with Eska, I can learn how to manage and lead the group. Her motivation and ambition give us significant process in our projects. Eska is an exceptional team builder with a gift for translating lofty goals into detailed strategies that everyone can implement. She made an indelible mark by her dedication to innovation and substantial advancement, making it an honour to work on a project with her. Her vision, enthusiasm, and drive propel the organisation to new heights, and she serves as an exemplar in the fields of education and technology.” Islomobek Isroilov Computing Lecturer, AI team member December 2024</p>
+                <p>“Eska’s leadership and capabilities have been pivotal in driving the AI project forward, showcasing her exceptional qualities as a leader and innovator...</p>
             </div>
         </div>
     </div>
