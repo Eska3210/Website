@@ -25,28 +25,22 @@
     --shadow: rgba(0,0,0,0.35);
 }
 
-/* DARK MODE TOGGLE CLASS */
+/* ========= DARK MODE ========= */
+
 body.dark {
     background: var(--bg-dark);
     color: var(--text-dark);
 }
 
-body.dark header {
-    background: var(--metal-dark);
-}
-
-body.dark .menu-tile {
-    background: var(--tile-dark);
-    color: var(--text-dark);
-}
-
+body.dark header { background: var(--metal-dark); }
+body.dark .menu-tile { background: var(--tile-dark); color: var(--text-dark); }
 body.dark #contentBox {
-    background: #2b2b2b;
+    background: #2b2b2b; 
     color: var(--text-dark);
     box-shadow: 4px 4px 14px black;
 }
 
-/* ========= GENERAL STYLING ========= */
+/* ========= GENERAL ========= */
 
 body {
     margin:0;
@@ -69,13 +63,10 @@ header {
     animation: shine 4s linear infinite;
 }
 
-h1 {
-    margin:0;
-    font-size:2rem;
-    font-weight:bold;
-}
+h1 { margin:0; font-size:2rem; font-weight:bold; }
 
-/* ========= DARK MODE SWITCH ========= */
+/* ========= DARK MODE BUTTON ========= */
+
 #darkModeToggle {
     position:absolute;
     top:20px;
@@ -116,7 +107,6 @@ body.dark #darkModeToggle {
     box-shadow: 3px 3px 14px var(--shadow);
     animation: shine 6s linear infinite;
 }
-
 .menu-tile:hover {
     transform:scale(1.08);
     box-shadow: 0 0 18px var(--highlight), 3px 3px 14px var(--shadow);
@@ -136,18 +126,42 @@ body.dark #darkModeToggle {
     display:none;
     animation: fadeIn .4s ease-in-out;
 }
+#contentBox h2 { font-size:1.8rem; margin-top:0; }
+#contentBox p, li { font-size:1.2rem; line-height:1.6rem; }
 
-#contentBox h2 {
-    font-size:1.8rem;
-    margin-top:0;
+/* ========= FULLSCREEN CV VIEWER ========= */
+
+#cvFullscreen {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100vw;
+    height:100vh;
+    background:rgba(0,0,0,0.85);
+    z-index:9999;
+    padding:20px;
+    box-sizing:border-box;
 }
 
-#contentBox p, li {
-    font-size:1.2rem;
-    line-height:1.6rem;
+#cvFullscreen iframe {
+    width:100%;
+    height:100%;
+    border:none;
+    border-radius:18px;
+}
+
+#cvCloseBtn {
+    position:absolute;
+    top:20px;
+    right:30px;
+    font-size:3rem;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 /* ========= ANIMATIONS ========= */
+
 @keyframes shine {
     0% { background-position:0% 50%; }
     50% { background-position:100% 50%; }
@@ -166,10 +180,8 @@ body.dark #darkModeToggle {
     <h1>Eska Rashid Portfolio</h1>
 </header>
 
-<!-- DARK MODE BUTTON -->
 <div id="darkModeToggle" onclick="toggleDarkMode()">Dark Mode</div>
 
-<!-- MENU TILES -->
 <div id="menuTiles">
     <div class="menu-tile" onclick="openSection('about')">About</div>
     <div class="menu-tile" onclick="openSection('qualifications')">Qualifications</div>
@@ -179,12 +191,17 @@ body.dark #darkModeToggle {
     <div class="menu-tile" onclick="openSection('contact')">Contact</div>
 </div>
 
-<!-- CONTENT AREA -->
 <div id="contentBox"></div>
+
+<!-- ========= FULLSCREEN CV VIEWER ========= -->
+<div id="cvFullscreen">
+    <div id="cvCloseBtn" onclick="closeFullscreenCV()">×</div>
+    <iframe src="Eska_Rashid_CV.pdf"></iframe>
+</div>
 
 <script>
 
-/* ========= SECTION CONTENT ========= */
+/* ========= SECTIONS ========= */
 const sections = {
     about: `
         <h2>About</h2>
@@ -225,13 +242,29 @@ const sections = {
 
     cv: `
         <h2>Curriculum Vitae</h2>
+
         <p>Your CV automatically loads below:</p>
-        <iframe src="Eska_Rashid_CV.docx" 
-                style="width:100%; height:600px; border-radius:12px; border:2px solid #999;">
+
+        <iframe 
+            src="Eska_Rashid_CV.pdf"
+            style="width:100%; height:600px; border-radius:12px; border:2px solid #999;">
         </iframe>
 
         <br><br>
-        <a href="Eska_Rashid_CV.docx" download>
+
+        <button onclick="openFullscreenCV()" style="
+            padding:16px 24px;
+            font-size:1.2rem;
+            border:none;
+            border-radius:18px;
+            background:var(--button-gradient);
+            font-weight:bold;
+            cursor:pointer;
+            margin-right:12px;
+            box-shadow:3px 3px 10px var(--shadow);
+        ">Open Fullscreen</button>
+
+        <a href="Eska_Rashid_CV.pdf" download>
             <button style="
                 padding:16px 24px;
                 font-size:1.2rem;
@@ -241,7 +274,7 @@ const sections = {
                 font-weight:bold;
                 cursor:pointer;
                 box-shadow:3px 3px 10px var(--shadow);
-                ">Download CV</button>
+            ">Download CV</button>
         </a>
     `,
 
@@ -253,19 +286,26 @@ const sections = {
     `
 };
 
-/* ========= DISPLAY SECTION ========= */
+/* ========= LOAD SECTION ========= */
 function openSection(name) {
     const box = document.getElementById("contentBox");
     box.style.display = "block";
     box.innerHTML = sections[name];
 }
 
-/* ========= DARK MODE TOGGLE ========= */
-
+/* ========= DARK MODE ========= */
 function toggleDarkMode() {
     document.body.classList.toggle("dark");
     document.getElementById("darkModeToggle").textContent =
         document.body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
+}
+
+/* ========= FULLSCREEN CV ========= */
+function openFullscreenCV() {
+    document.getElementById("cvFullscreen").style.display = "block";
+}
+function closeFullscreenCV() {
+    document.getElementById("cvFullscreen").style.display = "none";
 }
 
 </script>
