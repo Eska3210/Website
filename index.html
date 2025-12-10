@@ -10,8 +10,6 @@
     --bg-dark: #1d1d1d;
     --text-light: #222;
     --text-dark: #f1f1f1;
-    --metal-light: linear-gradient(145deg, #ffffff, #cfd1d3, #a8a8ab);
-    --metal-dark: linear-gradient(145deg, #3a3a3a, #2b2b2b, #1c1c1c);
     --tile-light: linear-gradient(145deg, #f0f0f0, #c8c8c8, #a0a0a0);
     --tile-dark: linear-gradient(145deg, #4a4a4a, #333, #222);
     --highlight: #1e90ff;
@@ -23,24 +21,23 @@ body {
 }
 
 body.dark { background: var(--bg-dark); color: var(--text-dark);}
-body.dark header { background: var(--metal-dark);}
+body.dark header { background: var(--tile-dark);}
 body.dark .menu-tile { background: var(--tile-dark); color: var(--text-dark);}
 body.dark .expandable, body.dark #bioPanel { background: var(--tile-dark); color: var(--text-dark); }
 
 header {
-    text-align:center; padding:25px; width:100%; background: var(--metal-light);
+    text-align:center; padding:25px; width:100%; background: var(--tile-light);
     box-shadow:0 6px 14px var(--shadow); border-bottom:2px solid #888;
 }
-
 h1 { margin:0; font-size:2rem; font-weight:bold;}
 
 #darkModeToggle {
     position:absolute; top:20px; right:20px; padding:10px 18px; background: var(--tile-light);
     border-radius:12px; cursor:pointer; font-weight:bold; box-shadow:3px 3px 10px var(--shadow);
 }
-body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark);}
+body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark); }
 
-/* Tiles */
+/* Menu Tiles */
 #menuTiles {
     display:flex; flex-wrap:wrap; justify-content:center; gap:20px; width:90%; margin-top:20px;
 }
@@ -52,56 +49,49 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
 }
 .menu-tile:hover { transform:scale(1.08); box-shadow:0 0 20px var(--highlight), 3px 3px 14px var(--shadow); border:3px solid var(--highlight); }
 
-/* Profile + side tiles layout */
+/* Profile Section Layout */
 #profileSection {
-    display:flex; justify-content:center; align-items:flex-start; gap:40px; margin-top:50px; flex-wrap:wrap;
+    display:flex; justify-content:center; align-items:flex-start; gap:40px; margin:50px 20px; flex-wrap:nowrap;
 }
 
-.sideTiles {
-    display:flex; flex-direction:column; gap:20px; max-width:350px; align-items:center;
+/* Side Tiles */
+.sideTile {
+    flex:1; display:flex; flex-direction:column; gap:20px; max-width:400px;
 }
-
-#profileTile {
-    cursor:pointer; text-align:center; display:flex; flex-direction:column; align-items:center;
+.sideTile .tileHeader {
+    font-size:1.5rem; font-weight:bold; text-align:center; padding:20px; border-radius:16px;
+    background:var(--tile-light); cursor:pointer; box-shadow: 3px 3px 12px var(--shadow);
+    transition: transform .3s, box-shadow .3s;
 }
-#profileTile img { width:150px; border-radius:20px; transition: transform .3s; margin-bottom:10px;}
-#profileTile img:hover { transform: scale(1.05); }
+.sideTile .tileHeader:hover { transform:scale(1.05); box-shadow:0 0 18px var(--highlight), 3px 3px 12px var(--shadow); }
 
-#bioPanel {
-    max-height:0; overflow:hidden; transition:max-height 0.5s ease, padding 0.5s ease;
-    background: var(--tile-light); padding:0 20px; border-radius:12px; box-shadow:2px 2px 10px var(--shadow); font-size:0.95rem; line-height:1.5; text-align:left;
-}
-#bioPanel.show { padding:20px; max-height:1500px; }
-
-/* Expandable panels for Personal Statement & Testimonials */
 .expandable {
     max-height:0; overflow:hidden; transition:max-height 0.5s ease, padding 0.5s ease;
     background: var(--tile-light); padding:0 20px; border-radius:12px; box-shadow:2px 2px 10px var(--shadow); font-size:0.95rem; line-height:1.5; text-align:left;
 }
 .expandable.show { padding:20px; max-height:1500px; }
-.expandable-content {
-    max-height:400px; overflow-y:auto; /* Scroll independently */
+.expandable-content { max-height:400px; overflow-y:auto; padding-right:10px; }
+
+/* Center Image */
+#profileTile {
+    flex:0 0 200px; display:flex; flex-direction:column; align-items:center; cursor:pointer; text-align:center;
 }
+#profileTile img { width:160px; border-radius:20px; transition: transform .3s; }
+#profileTile img:hover { transform: scale(1.05); }
+#bioPanel {
+    max-height:0; overflow:hidden; transition:max-height 0.5s ease, padding 0.5s ease;
+    background: var(--tile-light); padding:0 20px; border-radius:12px; box-shadow:2px 2px 10px var(--shadow); font-size:0.9rem; line-height:1.5; text-align:left;
+}
+#bioPanel.show { padding:20px; max-height:1500px; }
 
-/* Content box */
-#contentBox { margin-top:30px; background:white; padding:30px; width:90%; max-width:900px; border-radius:20px; box-shadow:4px 4px 14px var(--shadow); display:none; font-size:0.95rem; line-height:1.5; max-height:600px; overflow-y:auto; text-align:left; }
-
-#cvFullscreen { display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:9999; padding:20px; }
-#cvFullscreen iframe { width:100%; height:100%; border:none; border-radius:18px; }
-#cvCloseBtn { position:absolute; top:20px; right:30px; font-size:3rem; color:white; cursor:pointer; font-weight:bold; }
-
-/* Responsive layout */
-@media(max-width:1000px){
+/* Responsive */
+@media(max-width:1100px){
     #profileSection { flex-direction:column; align-items:center; gap:30px; }
-    .sideTiles { flex-direction:row; justify-content:center; gap:20px; }
-}
-@media(max-width:600px){
-    #profileTile img { width:130px; }
-    .sideTiles { flex-direction:column; }
+    .sideTile { max-width:90%; }
+    #profileTile { flex:0 0 auto; }
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -122,8 +112,9 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
 
 <!-- Profile Section -->
 <div id="profileSection">
-    <div class="sideTiles">
-        <div class="menu-tile" onclick="toggleExpandable('personalPanel')">Personal Statement</div>
+    <!-- Left Personal Statement -->
+    <div class="sideTile">
+        <div class="tileHeader" onclick="toggleExpandable('personalPanel')">Personal Statement</div>
         <div id="personalPanel" class="expandable">
             <div class="expandable-content">
                 <p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership. This combined experience has given me the skills and knowledge to excel as a Computing Lecturer and Programme Lead, interviewing, training, mentoring and leading Computer Science Lecturers.</p>
@@ -135,32 +126,28 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
         </div>
     </div>
 
+    <!-- Center Image -->
     <div id="profileTile" onclick="toggleExpandable('bioPanel')">
         <img src="https://raw.githubusercontent.com/Eska3210/Website/main/Eska%20Rashid%20photo%20PNG.png" alt="Eska Rashid">
         <div id="bioPanel">
-            <p>Professional Overview: Eska Rashid is a Programme Leader specialising in Computing, with a dedicated focus on Artificial Intelligence (AI) and Technology Leadership. Eska became a computing Lecturer in 2004 and has always been dedicated to computer science. Eska holds an MSc with Distinction in Computer Science. As the Programme Leader for Computer Science for Bath Spa University, Eska oversees the development and delivery of computer science that prepares students for the rapidly evolving tech industry. She is also leading an AI and Tech project in integrating AI into ESL, ensuring that students gain hands-on experience with the latest technologies and methodologies. In her role as AI & Tech Lead, Eska drives initiatives aimed at making use of advancing AI research and application within the institution. She collaborates with industry partners to create opportunities for student engagement in real-world projects, bridging the gap between academia and industry. She also uses her industry contacts for her AI role that provide insightful and valuable feedback. Eska has built partnerships with leading tech companies, providing students with placements, workshops, opportunities. For student success, Eska has mentored students who have gone on to secure positions at Lloyds Banking Group. Eska is deeply committed to promoting diversity and inclusion within the tech field. She actively participates in initiatives aimed at encouraging underrepresented groups to pursue careers in computing and AI. Her teaching philosophy emphasises hands-on learning, critical thinking, and the implications of AI, ensuring that her students are not only skilled technologists but also responsible innovators. Eska Rashid’s dedication to excellence in computing education and her visionary leadership in AI make her a pivotal figure in shaping the future of technology and innovation.</p>
+            <p>Professional Overview: Eska Rashid is a Programme Leader specialising in Computing, with a dedicated focus on Artificial Intelligence (AI) and Technology Leadership. Eska became a computing Lecturer in 2004 and has always been dedicated to computer science. Eska holds an MSc with Distinction in Computer Science. As the Programme Leader for Computer Science for Bath Spa University, Eska oversees the development and delivery of computer science that prepares students for the rapidly evolving tech industry. She is also leading an AI and Tech project in integrating AI into ESL, ensuring that students gain hands-on experience with the latest technologies and methodologies. In her role as AI & Tech Lead, Eska drives initiatives aimed at making use of advancing AI research and application within the institution. She collaborates with industry partners to create opportunities for student engagement in real-world projects, bridging the gap between academia and industry. She also uses her industry contacts for her AI role that provide insightful and valuable feedback. Eska has built partnerships with leading tech companies, providing students with placements, workshops, opportunities. For student success, Eska has mentored students who have gone on to secure positions at Lloyds Banking Group. She is deeply committed to promoting diversity and inclusion within the tech field. She actively participates in initiatives aimed at encouraging underrepresented groups to pursue careers in computing and AI. Her teaching philosophy emphasises hands-on learning, critical thinking, and the implications of AI, ensuring that her students are not only skilled technologists but also responsible innovators. Eska Rashid’s dedication to excellence in computing education and her visionary leadership in AI make her a pivotal figure in shaping the future of technology and innovation.</p>
         </div>
     </div>
 
-    <div class="sideTiles">
-        <div class="menu-tile" onclick="toggleExpandable('testimonialPanel')">Testimonials</div>
+    <!-- Right Testimonials -->
+    <div class="sideTile">
+        <div class="tileHeader" onclick="toggleExpandable('testimonialPanel')">Testimonials</div>
         <div id="testimonialPanel" class="expandable">
             <div class="expandable-content">
-                <p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses in a standardized format. She actively supports lecturers by providing them with the necessary resources. Eska keeps every team member informed about current activities and future goals, fostering a collaborative and transparent environment. She also organizes tech events and promotes a student-led learning approach, encouraging autonomy and innovation among students.” – Ayodeji Triola, Computing Lecturer, AI team member December 2024</p>
-                <p>"Working under Eska Rashid's leadership on the AI project has been a good experience. Her vision for integrating AI to enhance learning, particularly for ESL students, is truly inspiring. From the outset, Eska demonstrated a unique ability to blend technical expertise with a deep understanding of students' needs, ensuring that every decision we made was both innovative and impactful." – Khurram Asif, Computing Lecturer, AI team member December 2024</p>
-                <p>“Collaborating with Eska Rashid on the AI project has been an exceptional experience. Her innovative vision for harnessing AI to transform learning, especially for ESL students, is both ambitious and inspiring. From the start, Eska exhibited remarkable leadership, seamlessly merging technical acumen with a profound understanding of educational needs, ensuring that every aspect of the project was impactful and future-focused.” – Hriday Grover, Computing Lecturer, AI team member December 2024</p>
-                <p>… (all other testimonials continue here as needed) …</p>
+                <p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses in a standardized format. She actively supports lecturers by providing them with the necessary resources. Eska keeps every team member informed about current activities and future goals, fostering a collaborative and transparent environment. She also organizes tech events and promotes a student-led learning approach, encouraging autonomy and innovation among students.” – Ayodeji Triola</p>
+                <p>"Working under Eska Rashid's leadership on the AI project has been a good experience. Her vision for integrating AI to enhance learning, particularly for ESL students, is truly inspiring. From the outset, Eska demonstrated a unique ability to blend technical expertise with a deep understanding of students' needs, ensuring that every decision we made was both innovative and impactful." – Khurram Asif</p>
+                <p>… (all other testimonials continue here) …</p>
             </div>
         </div>
     </div>
 </div>
 
 <div id="contentBox"></div>
-
-<div id="cvFullscreen">
-    <div id="cvCloseBtn" onclick="closeFullscreenCV()">×</div>
-    <iframe src="Eska_Rashid_CV.pdf"></iframe>
-</div>
 
 <script>
 const sections = {
@@ -169,7 +156,7 @@ const sections = {
     history:`<ul><li>Programme Leader, Computing – Bath Spa University / ESL</li><li>AI & Tech CAPD Project Lead</li><li>Computing Lecturer – Multiple Institutions</li><li>AI Consultant – Outlier AI</li><li>Tech Representative Manager – University of Huddersfield</li></ul>`,
     ambitions:`<ul><li>Advance AI-driven tools in higher education</li><li>Expand industry partnerships</li><li>Strengthen diversity & inclusion in technology</li><li>Lead innovative AI projects</li></ul>`,
     technical:`<p>PHP, SQL, Python, Java, C#, C++, MySQL, ASP.NET, CSS, Excel, Access, Google Suite, Microsoft apps, Bootstrap, Javascript, HTML, XML, PostgreSQL, Node js, Pandas, Git, MongoDB, .NET, Illustrator, Google Sheets, R, Redis, XAMPP, Power BI, DAX.</p>`,
-    cv:`<p>Your CV automatically loads below:</p><button onclick="openFullscreenCV()">Open Fullscreen</button><a href="Eska_Rashid_CV.pdf" download><button>Download CV</button></a>`,
+    cv:`<p>Your CV automatically loads below:</p>`,
     contact:`<p>Email: eska3210@gmail.com</p><p>LinkedIn: linkedin.com/in/eska-rashid</p><p>Mobile: 07776075490</p>`
 };
 
@@ -181,17 +168,13 @@ function openSection(name){
 }
 
 function toggleExpandable(id){
-    const panel=document.getElementById(id);
-    panel.classList.toggle('show');
+    document.getElementById(id).classList.toggle('show');
 }
 
 function toggleDarkMode(){
     document.body.classList.toggle("dark");
     document.getElementById("darkModeToggle").textContent=document.body.classList.contains("dark")?"Light Mode":"Dark Mode";
 }
-
-function openFullscreenCV(){ document.getElementById("cvFullscreen").style.display="block"; }
-function closeFullscreenCV(){ document.getElementById("cvFullscreen").style.display="none"; }
 </script>
 
 </body>
