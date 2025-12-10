@@ -58,12 +58,16 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
     display:flex; justify-content:center; align-items:flex-start; gap:30px; margin-top:40px; flex-wrap:wrap; width:90%; max-width:1200px;
 }
 
-#profileTile img { width:250px; border-radius:20px; cursor:pointer; transition: transform .3s;}
-#profileTile img:hover { transform: scale(1.05); }
-
 .sideTiles {
     display:flex; flex-direction:column; gap:20px;
+    flex: 1 1 200px;
 }
+
+#profileTile {
+    cursor:pointer; flex: 1 1 250px;
+}
+#profileTile img { width:250px; border-radius:20px; transition: transform .3s;}
+#profileTile img:hover { transform: scale(1.05); }
 
 #bioBox {
     display:none; max-width:700px; font-size:0.95rem; line-height:1.5; margin-top:15px;
@@ -82,6 +86,16 @@ body.dark #darkModeToggle { background: var(--tile-dark); color: var(--text-dark
 #lightbox { display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center; }
 #lightbox img { max-width:90%; max-height:90%; border-radius:20px; box-shadow:0 0 20px var(--shadow); }
 #lightboxClose { position:absolute; top:20px; right:30px; font-size:3rem; color:white; cursor:pointer; font-weight:bold; }
+
+/* ========= RESPONSIVE LAYOUT ========= */
+@media(max-width:1000px){
+    #profileSection { flex-direction:column; align-items:center; }
+    .sideTiles { flex-direction:row; justify-content:center; gap:20px; }
+}
+@media(max-width:600px){
+    .sideTiles { flex-direction:column; }
+    #profileTile img { width:200px; }
+}
 </style>
 </head>
 
@@ -152,7 +166,7 @@ const sections = {
     personal:`<p>I am a passionate and results-oriented computing professional with a background in academia, project management, and leadership. This combined experience has given me the skills and knowledge to excel as a Computing Lecturer and Programme Lead, interviewing, training, mentoring and leading Computer Science Lecturers.<br><br>
     Increasing my professional network, I have established valuable connections with industry leaders from Lloyds Bank, Yorkshire Water, CalderIT, Future Transformations, Hippo, Answer Digital, Parall.ax and more. This provides guest speaker opportunities and real-world insights.<br><br>
     I actively attend live webinars on AI, robotics and emerging technologies to stay ahead of the curve and incorporate these advancements into teaching. My leadership skills were built at Huddersfield University's laptop rental service. Achieving a distinction in my MSc Computer Science programme, I consistently excelled, gaining leadership skills and resilience.</p>`,
-    testimonials:`<p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses in a standardized format...” Ayodeji Triola Computing Lecturer, AI team member December 2024<br><br>
+    testimonials:`<p>“Eska is a dedicated and committed leader who ensures that learning materials are consistently delivered across all campuses...” Ayodeji Triola Computing Lecturer, AI team member December 2024<br><br>
     "Working under Eska Rashid's leadership on the AI project has been a good experience..." Khurram Asif Computing Lecturer, AI team member December 2024<br><br>
     “Collaborating with Eska Rashid on the AI project has been an exceptional experience...” Hriday Grover Computing Lecturer, AI team member December 2024<br><br>
     “Eska’s ability to transform ambitious ideas into actionable plans...” Muhsin Hassanu Computing Lecturer, AI team member December 2024</p>`,
