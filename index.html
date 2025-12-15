@@ -33,18 +33,58 @@ body.dark #bioPanel {
     color:var(--text-dark);
 }
 
-/* ✅ FIX: Dark header */
+/* FIX: Dark header */
 body.dark header {
     background: var(--tile-dark);
     color: var(--text-dark);
     border-bottom: 2px solid #444;
 }
 
-/* ✅ FIX: Dark Personal Statement & Testimonials headers */
+/* FIX: Dark Personal Statement & Testimonials headers */
 body.dark .tileHeader {
     background: var(--tile-dark);
     color: var(--text-dark);
 }
+
+
+/* Dark mode box adjustments */
+body.dark .menu-tile,
+body.dark .expandable,
+body.dark #bioPanel,
+body.dark .tileHeader,
+body.dark .technical-tiles div,
+body.dark #contentBox {
+    background: #2c2c2c; /* Darker background for contrast */
+    color: #f1f1f1;      /* Light text for readability */
+    box-shadow: 3px 3px 16px rgba(0,0,0,0.6); /* Slightly stronger shadow for depth */
+}
+
+/* Ensure links in dark mode are visible */
+body.dark a {
+    color: #1e90ff; /* Bright blue */
+    text-decoration: underline;
+}
+
+/* Scrollbar in dark mode */
+body.dark .expandable-content::-webkit-scrollbar-track,
+body.dark #bioPanel::-webkit-scrollbar-track {
+    background: #2c2c2c;
+}
+body.dark .expandable-content::-webkit-scrollbar-thumb,
+body.dark #bioPanel::-webkit-scrollbar-thumb {
+    background-color: #1e90ff;
+}
+
+/* Optional: Increase padding slightly for better readability */
+body.dark .expandable,
+body.dark #bioPanel,
+body.dark #contentBox {
+    padding: 25px;
+}
+
+    
+
+
 
 header {
     text-align:center;
